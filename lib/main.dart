@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:crabcheck/pages/home_page.dart';
+import 'package:crabcheck/constants/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,8 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       theme: ThemeData(
-        fontFamily: 'Poppins',
-      ),
+          fontFamily: 'Poppins', scaffoldBackgroundColor: backgroundColor),
     );
   }
 }
