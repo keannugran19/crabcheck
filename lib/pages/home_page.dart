@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
     const appName = "CRABCHECK";
 
     // Capture Image
+    // ignore: unused_local_variable
     File? imageCapture;
     Future captureImage() async {
       try {
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     // Upload Image
+    // ignore: unused_local_variable
     File? imageUpload;
     Future uploadImage() async {
       try {
