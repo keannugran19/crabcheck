@@ -20,11 +20,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     const appName = "CRABCHECK";
 
-    // Camera and Image Integration
-    File? image;
-    Future pickImage() async {
+    // Capture Image
+    File? imageCapture;
+    Future captureImage() async {
       try {
+        // Source: Camera
         final image = await ImagePicker().pickImage(source: ImageSource.camera);
+        if (image == null) return;
+        final imageTemp = File(image.path);
+        setState(() => this.image = imageTemp);
+      } on PlatformException catch (e) {
+        print('Failed to pick image: $e');
+      }
+    }
+
+    // Upload Image
+    File? imageUpload;
+    Future uploadImage() async {
+      try {
+        // Source: Camera
+        final image =
+            await ImagePicker().pickImage(source: ImageSource.gallery);
         if (image == null) return;
         final imageTemp = File(image.path);
         setState(() => this.image = imageTemp);
@@ -80,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               buttonText: "Capture",
               buttonColor: colorScheme.secondary,
               onPressed: () {
-                pickImage();
+                captureImage();
               },
             ),
 
@@ -92,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                 buttonText: "Upload",
                 buttonColor: colorScheme.secondary,
                 onPressed: () {
-                  pickImage();
+                  uploadImage();
                 }),
           ]),
         ),
