@@ -18,8 +18,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    const appName = "CRABCHECK";
-
     // Capture Image
     // ignore: unused_local_variable
     File? imageCapture;
@@ -51,68 +49,60 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(children: [
-            // About Us Button
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 30.0, 20.0, 0.0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Image.asset("lib/assets/images/info.png"),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                    0.0, screenHeight * 0.03, screenWidth * 0.05, 0.0),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: SizedBox(
+                    height: screenHeight * 0.04,
+                    width: screenWidth * 0.1,
+                    child: Image.asset("lib/assets/images/info.png"),
+                  ),
                 ),
               ),
-            ),
-
-            const SizedBox(
-              height: 50,
-            ),
-
-            // Crabcheck Logo
-            Column(
-              children: [
-                SizedBox(
-                    width: 250,
-                    height: 250,
-                    child: Image.asset("lib/assets/images/crabLogo.png")),
-                Text(
-                  appName,
-                  style: TextStyle(
+              SizedBox(height: screenHeight * 0.05),
+              Column(
+                children: [
+                  SizedBox(
+                    width: screenWidth * 0.5,
+                    height: screenHeight * 0.25,
+                    child: Image.asset("lib/assets/images/crabLogo.png"),
+                  ),
+                  Text(
+                    "CRABCHECK",
+                    style: TextStyle(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
-                      fontSize: 35),
-                )
-              ],
-            ),
-
-            const SizedBox(
-              height: 60,
-            ),
-
-            // Capture button
-            HomeButton(
-              buttonText: "Capture",
-              buttonColor: colorScheme.secondary,
-              onPressed: () {
-                captureImage();
-              },
-            ),
-
-            const SizedBox(
-              height: 20,
-            ),
-
-            HomeButton(
-                buttonText: "Upload",
-                buttonColor: colorScheme.secondary,
-                onPressed: () {
-                  uploadImage();
-                }),
-          ]),
+                      fontSize: 35,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.06),
+              HomeButton(
+                  buttonText: "Capture",
+                  buttonColor: colorScheme.secondary,
+                  onPressed: () {
+                    captureImage();
+                  }),
+              SizedBox(height: screenHeight * 0.02),
+              HomeButton(
+                  buttonText: "Upload",
+                  buttonColor: colorScheme.secondary,
+                  onPressed: () {
+                    uploadImage();
+                  }),
+            ],
+          ),
         ),
       ),
     );
