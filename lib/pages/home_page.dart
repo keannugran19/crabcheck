@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/constants/colors.dart';
@@ -29,7 +30,6 @@ class _HomePageState extends State<HomePage> {
         if (image == null) return;
         final imageTemp = File(image.path);
         setState(() => this.image = imageTemp);
-        return const LoadingPage();
       } on PlatformException catch (e) {
         print('Failed to pick image: $e');
       }
@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
         if (image == null) return;
         final imageTemp = File(image.path);
         setState(() => this.image = imageTemp);
-        return const LoadingPage();
       } on PlatformException catch (e) {
         print('Failed to pick image: $e');
       }
@@ -65,11 +64,19 @@ class _HomePageState extends State<HomePage> {
                     0.0, screenHeight * 0.03, screenWidth * 0.05, 0.0),
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: SizedBox(
-                    height: screenHeight * 0.04,
-                    width: screenWidth * 0.1,
-                    child: Image.asset("lib/assets/images/info.png"),
-                  ),
+                  child: InkWell(
+                      child: SizedBox(
+                        height: screenHeight * 0.04,
+                        width: screenWidth * 0.1,
+                        child: Image.asset("lib/assets/images/info.png"),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AboutPage()),
+                        );
+                      }),
                 ),
               ),
               SizedBox(height: screenHeight * 0.05),
