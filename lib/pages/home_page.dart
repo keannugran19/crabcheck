@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crabcheck/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/components/home_button.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
         if (image == null) return;
         final imageTemp = File(image.path);
         setState(() => this.image = imageTemp);
+        return const LoadingPage();
       } on PlatformException catch (e) {
         print('Failed to pick image: $e');
       }
@@ -44,6 +46,7 @@ class _HomePageState extends State<HomePage> {
         if (image == null) return;
         final imageTemp = File(image.path);
         setState(() => this.image = imageTemp);
+        return const LoadingPage();
       } on PlatformException catch (e) {
         print('Failed to pick image: $e');
       }
