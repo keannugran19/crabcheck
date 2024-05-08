@@ -19,7 +19,7 @@ class Button extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         fixedSize: MaterialStateProperty.all(
-          const Size(150, 40), // Set the desired width and height
+          const Size(160, 50), // Set the desired width and height
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -41,7 +41,7 @@ class Button extends StatelessWidget {
       child: Text(
         buttonText,
         style: TextStyle(
-          fontSize: 14,
+          fontSize: 15,
           color: colorScheme.background,
         ),
       ),

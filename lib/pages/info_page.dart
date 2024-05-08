@@ -38,7 +38,7 @@ class InfoPage extends StatelessWidget {
                               15) // Adjust the radius as needed
                           ),
                       child: Image.asset(scyllaSerrata.crabImage,
-                          fit: BoxFit.cover),
+                          fit: BoxFit.contain),
                     ),
                   ),
                 ),
