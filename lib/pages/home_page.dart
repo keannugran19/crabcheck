@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                     0.0, screenHeight * 0.03, screenWidth * 0.05, 0.0),
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: InkWell(
+                  child: GestureDetector(
                       child: SizedBox(
                         height: screenHeight * 0.04,
                         width: screenWidth * 0.1,
