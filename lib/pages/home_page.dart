@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:crabcheck/pages/about_page.dart';
+import 'package:crabcheck/pages/howtouse_page.dart';
 import 'package:crabcheck/pages/loading_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/components/home_button.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatefulWidget {
@@ -111,6 +114,23 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     uploadImage();
                   }),
+
+              // Bottom text "how to use our app"
+              SizedBox(height: screenHeight * 0.3),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HowPage()));
+                    },
+                    child: const Text(
+                      "How to use our app?",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ))
             ],
           ),
         ),
