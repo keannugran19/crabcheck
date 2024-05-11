@@ -58,47 +58,61 @@ class _HomePageState extends State<HomePage> {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colorScheme.background,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: colorScheme.primary,
+              ),
+              child: const Text('CRABCHECK'),
+            ),
+            ListTile(
+              title: const Text('How to use our App?'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('About Us'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ), // Populate the Drawer in the next step.
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(
-                    0.0, screenHeight * 0.03, screenWidth * 0.05, 0.0),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: GestureDetector(
-                      child: SizedBox(
-                        height: screenHeight * 0.04,
-                        width: screenWidth * 0.1,
-                        child: Image.asset("lib/assets/images/info.png"),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AboutPage()),
-                        );
-                      }),
-                ),
-              ),
               SizedBox(height: screenHeight * 0.05),
-              Column(
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.5,
-                    height: screenHeight * 0.25,
-                    child: Image.asset("lib/assets/images/crabLogo.png"),
-                  ),
-                  Text(
-                    "CRABCHECK",
-                    style: TextStyle(
-                      color: colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,
+              Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: screenWidth * 0.5,
+                      height: screenHeight * 0.25,
+                      child: Image.asset("lib/assets/images/crabLogo.png"),
                     ),
-                  ),
-                ],
+                    Text(
+                      "CRABCHECK",
+                      style: TextStyle(
+                        color: colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: screenHeight * 0.06),
               HomeButton(
@@ -114,23 +128,6 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     uploadImage();
                   }),
-
-              // Bottom text "how to use our app"
-              SizedBox(height: screenHeight * 0.3),
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HowPage()));
-                    },
-                    child: const Text(
-                      "How to use our app?",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ))
             ],
           ),
         ),

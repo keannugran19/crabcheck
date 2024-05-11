@@ -1,3 +1,4 @@
+import 'package:crabcheck/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:crabcheck/constants/colors.dart';
