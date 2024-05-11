@@ -74,17 +74,19 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: const Text('How to use our App?'),
               onTap: () {
-                // Update the state of the app.
-                // ...
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HowPage()),
+                );
               },
             ),
             ListTile(
               title: const Text('About Us'),
               onTap: () {
-                // Update the state of the app.
-                // ...
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AboutPage()),
+                );
               },
             ),
           ],
