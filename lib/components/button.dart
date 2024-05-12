@@ -19,7 +19,7 @@ class Button extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         fixedSize: MaterialStateProperty.all(
-          const Size(160, 50), // Set the desired width and height
+          const Size(174, 50), // Set the desired width and height
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
