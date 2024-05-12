@@ -1,6 +1,7 @@
 import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/data/data.dart';
+import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
@@ -13,8 +14,14 @@ class InfoPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: colorScheme.background,
-          leading: const BackButton(
+          leading: BackButton(
             color: Colors.black,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            },
           ),
           title: const Text(
             "Result",
@@ -90,7 +97,13 @@ class InfoPage extends StatelessWidget {
                 Button(
                     buttonText: "Back to Home",
                     buttonColor: colorScheme.secondary,
-                    onPressed: () {})
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                    })
               ],
             ),
           ),

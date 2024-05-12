@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/howtouse_page.dart';
+import 'package:crabcheck/pages/info_page.dart';
 import 'package:crabcheck/pages/loading_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,36 @@ class _HomePageState extends State<HomePage> {
         if (image == null) return;
         final imageTemp = File(image.path);
         setState(() => this.image = imageTemp);
+
+        // Loading before showing info page
+        Navigator.push(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const LoadingPage()),
+        );
+
+        return FutureBuilder(
+          future: Future.delayed(
+            const Duration(seconds: 3),
+            () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const InfoPage();
+                  },
+                ),
+                (route) => false,
+              );
+            },
+          ),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return const LoadingPage();
+            }
+            return Container();
+          },
+        );
       } on PlatformException catch (e) {
         print('Failed to pick image: $e');
       }
@@ -49,6 +80,36 @@ class _HomePageState extends State<HomePage> {
         if (image == null) return;
         final imageTemp = File(image.path);
         setState(() => this.image = imageTemp);
+
+        // Loading before showing info page
+        Navigator.push(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const LoadingPage()),
+        );
+
+        return FutureBuilder(
+          future: Future.delayed(
+            const Duration(seconds: 3),
+            () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const InfoPage();
+                  },
+                ),
+                (route) => false,
+              );
+            },
+          ),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return const LoadingPage();
+            }
+            return Container();
+          },
+        );
       } on PlatformException catch (e) {
         print('Failed to pick image: $e');
       }
