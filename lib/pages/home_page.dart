@@ -127,10 +127,25 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: colorScheme.primary,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image:
+                          AssetImage('lib/assets/images/loginbackground.png'),
+                      fit: BoxFit.cover)),
+              child: Text(
+                'CRABCHECK',
+                style: TextStyle(
+                    shadows: const <Shadow>[
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 3.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ],
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25),
               ),
-              child: const Text('CRABCHECK'),
             ),
             ListTile(
               title: const Text('How to use our App?'),

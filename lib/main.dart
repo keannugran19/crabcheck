@@ -1,5 +1,3 @@
-import 'package:crabcheck/pages/info_page.dart';
-import 'package:crabcheck/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:crabcheck/constants/colors.dart';
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const InfoPage(),
+      home: const HomePage(),
       theme: ThemeData(
           fontFamily: 'Poppins', scaffoldBackgroundColor: backgroundColor),
     );
