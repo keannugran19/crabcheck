@@ -125,7 +125,7 @@ class InfoPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(
                                   15) // Adjust the radius as needed
                               ),
-                          child: Image.asset(scyllaSerrata.crabImage,
+                          child: Image.asset(zosimusAeneus.crabImage,
                               fit: BoxFit.contain),
                         ),
                       ),
@@ -135,7 +135,7 @@ class InfoPage extends StatelessWidget {
                       height: 20,
                     ),
 
-                    Text(scyllaSerrata.edibility,
+                    Text(zosimusAeneus.edibility,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
@@ -146,14 +146,14 @@ class InfoPage extends StatelessWidget {
                       height: 20,
                     ),
 
-                    Text("Species: ${scyllaSerrata.species}",
+                    Text("Species: ${zosimusAeneus.species}",
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
                           color: Colors.black,
                         )),
 
-                    Text("Local name: ${scyllaSerrata.localName}",
+                    Text("Local name: ${zosimusAeneus.localName}",
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
@@ -162,7 +162,7 @@ class InfoPage extends StatelessWidget {
 
                     Padding(
                       padding: const EdgeInsets.fromLTRB(25, 10, 25, 0.0),
-                      child: Text(scyllaSerrata.description,
+                      child: Text(zosimusAeneus.description,
                           textAlign: TextAlign.justify,
                           style: const TextStyle(
                             fontSize: 15,
