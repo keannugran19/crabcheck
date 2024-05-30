@@ -21,17 +21,14 @@ class HowPage extends StatelessWidget {
               padding: EdgeInsets.all(20.0),
               child: Text(
                 """1. If you found a crab, take a picture of the crab using the capture button. However, if you already have your own picture in your gallery, upload the photo using the upload button.
-                
+
 2. Wait for the image to process.
 
 3. The result will pop up and will classify the crab species and it's edibility.
 
     3.1 If the crab identified is inedible, we ask for  your permission to use your location to send the data to our CAGRO Fisheries section for mapping.
                 """,
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 15,
-                ),
+                style: TextStyle(fontSize: 20, height: 2),
               ),
             )
           ],

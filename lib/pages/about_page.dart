@@ -23,10 +23,7 @@ class AboutPage extends StatelessWidget {
               child: Text(
                 """We are BSIT students from Davao del Norte State College and we are implementing CrabCheck: A Smart Edible Crab Identification and Evaluation Mobile Application using Image Processing to CAGRO Fisheries Section for our Capstone Project.
                 """,
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 15,
-                ),
+                style: TextStyle(fontSize: 20, letterSpacing: 1.5, height: 2),
               ),
             )
           ],
