@@ -185,8 +185,8 @@ class InfoPage extends StatelessWidget {
                       height: 30,
                       width: 160,
                       child: Text(
-                        textAlign: TextAlign.justify,
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                        textAlign: TextAlign.center,
+                        "Allow us to use your location to help us improve our data.",
                         style: TextStyle(fontSize: 10),
                       ),
                     ),
