@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/data/data.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:crabcheck/constants/location.dart';
-import 'package:location/location.dart';
 
 class InfoPage extends StatelessWidget {
-  const InfoPage({super.key});
+  final File? filePath;
+  final double confidence;
+  final String label;
+  const InfoPage(
+      {super.key,
+      required this.confidence,
+      required this.label,
+      this.filePath});
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,12 @@ class InfoPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(
                               15) // Adjust the radius as needed
                           ),
-                      child: Image.asset(scyllaSerrata.crabImage,
-                          fit: BoxFit.contain),
+                      child: filePath == null
+                          ? const Text('')
+                          : Image.file(
+                              filePath!,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ),
                 ),
@@ -56,6 +67,12 @@ class InfoPage extends StatelessWidget {
                   height: 20,
                 ),
 
+                Text(
+                  "The Accuracy is ${confidence.toStringAsFixed(0)}%",
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
                 Text(scyllaSerrata.edibility,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -67,15 +84,15 @@ class InfoPage extends StatelessWidget {
                   height: 20,
                 ),
 
-                Text("Species: ${scyllaSerrata.species}",
+                Text("Species: $label",
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
                       color: Colors.black,
                     )),
 
-                Text("Local name: ${scyllaSerrata.localName}",
-                    style: const TextStyle(
+                const Text("Local name: Lambay",
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
                       color: Colors.black,
@@ -106,92 +123,6 @@ class InfoPage extends StatelessWidget {
                             builder: (context) => const HomePage()),
                       );
                     }),
-
-                const SizedBox(
-                  height: 100,
-                ),
-                // temporary not edible page
-                Column(
-                  children: [
-                    // Image Container
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 10, 0.0, 0.0),
-                        child: Container(
-                          height: size.height * 0.3,
-                          width: size.width * 0.9,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  15) // Adjust the radius as needed
-                              ),
-                          child: Image.asset(zosimusAeneus.crabImage,
-                              fit: BoxFit.contain),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(
-                      height: 20,
-                    ),
-
-                    Text(zosimusAeneus.edibility,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.red,
-                        )),
-
-                    const SizedBox(
-                      height: 20,
-                    ),
-
-                    Text("Species: ${zosimusAeneus.species}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20,
-                          color: Colors.black,
-                        )),
-
-                    Text("Local name: ${zosimusAeneus.localName}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20,
-                          color: Colors.black,
-                        )),
-
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 10, 25, 0.0),
-                      child: Text(zosimusAeneus.description,
-                          textAlign: TextAlign.justify,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                          )),
-                    ),
-
-                    const SizedBox(
-                      height: 50,
-                    ),
-
-                    // Button Back to Home
-                    Button(
-                        buttonText: "Use my Location",
-                        buttonColor: colorScheme.primary,
-                        onPressed: () {
-                          Location();
-                        }),
-                    const SizedBox(
-                      height: 30,
-                      width: 160,
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        "Allow us to use your location to help us improve our data.",
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
