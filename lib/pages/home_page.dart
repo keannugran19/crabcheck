@@ -1,15 +1,14 @@
 import 'dart:io';
+import 'dart:developer' as devtools;
 
 import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/howtouse_page.dart';
 import 'package:crabcheck/pages/info_page.dart';
 import 'package:crabcheck/pages/loading_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/components/home_button.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,101 +19,174 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  set image(File image) {}
+  File? filePath;
+  String label = '';
+  double confidence = 0.0;
+
+  Future<void> _tfLteInit() async {
+    String? res = await Tflite.loadModel(
+        model: "lib/assets/model/model_unquant.tflite",
+        labels: "lib/assets/model/labels.txt",
+        numThreads: 1, // defaults to 1
+        isAsset:
+            true, // defaults to true, set to false to load resources outside assets
+        useGpuDelegate:
+            false // defaults to false, set to true to use GPU delegate
+        );
+  }
+
+// Upload Image
+  uploadImage() async {
+    final ImagePicker picker = ImagePicker();
+// Pick an image.
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image == null) return;
+
+    var imageMap = File(image.path);
+
+    setState(() {
+      filePath = imageMap;
+    });
+
+    var recognitions = await Tflite.runModelOnImage(
+        path: image.path, // required
+        imageMean: 0.0, // defaults to 117.0
+        imageStd: 255.0, // defaults to 1.0
+        numResults: 2, // defaults to 5
+        threshold: 0.2, // defaults to 0.1
+        asynch: true // defaults to true
+        );
+
+    if (recognitions == null) {
+      devtools.log("recognitions is Null");
+      return;
+    }
+    devtools.log(recognitions.toString());
+    setState(() {
+      confidence = (recognitions[0]['confidence'] * 100);
+      label = recognitions[0]['label'].toString();
+    });
+
+    // Loading before showing info page
+    Navigator.push(
+      // ignore: use_build_context_synchronously
+      context,
+      MaterialPageRoute(builder: (context) => const LoadingPage()),
+    );
+
+    return FutureBuilder(
+      future: Future.delayed(
+        const Duration(seconds: 3),
+        () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return InfoPage(
+                  label: label,
+                  confidence: confidence,
+                  filePath: filePath,
+                );
+              },
+            ),
+            (route) => false,
+          );
+        },
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const LoadingPage();
+        }
+        return Container();
+      },
+    );
+  }
+
+  // capture via camera
+  captureImage() async {
+    final ImagePicker picker = ImagePicker();
+// Pick an image.
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
+
+    if (image == null) return;
+
+    var imageMap = File(image.path);
+
+    setState(() {
+      filePath = imageMap;
+    });
+
+    var recognitions = await Tflite.runModelOnImage(
+        path: image.path, // required
+        imageMean: 0.0, // defaults to 117.0
+        imageStd: 255.0, // defaults to 1.0
+        numResults: 2, // defaults to 5
+        threshold: 0.2, // defaults to 0.1
+        asynch: true // defaults to true
+        );
+
+    if (recognitions == null) {
+      devtools.log("recognitions is Null");
+      return;
+    }
+    devtools.log(recognitions.toString());
+    setState(() {
+      confidence = (recognitions[0]['confidence'] * 100);
+      label = recognitions[0]['label'].toString();
+    });
+
+    // Loading before showing info page
+    Navigator.push(
+      // ignore: use_build_context_synchronously
+      context,
+      MaterialPageRoute(builder: (context) => const LoadingPage()),
+    );
+
+    return FutureBuilder(
+      future: Future.delayed(
+        const Duration(seconds: 3),
+        () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return InfoPage(
+                  label: label,
+                  confidence: confidence,
+                  filePath: filePath,
+                );
+              },
+            ),
+            (route) => false,
+          );
+        },
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const LoadingPage();
+        }
+        return Container();
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Tflite.close();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tfLteInit();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Capture Image
-    // ignore: unused_local_variable
-    File? imageCapture;
-    Future captureImage() async {
-      try {
-        // Source: Camera
-        final image = await ImagePicker().pickImage(source: ImageSource.camera);
-        if (image == null) return;
-        final imageTemp = File(image.path);
-        setState(() => this.image = imageTemp);
-
-        // Loading before showing info page
-        Navigator.push(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(builder: (context) => const LoadingPage()),
-        );
-
-        return FutureBuilder(
-          future: Future.delayed(
-            const Duration(seconds: 3),
-            () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const InfoPage();
-                  },
-                ),
-                (route) => false,
-              );
-            },
-          ),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return const LoadingPage();
-            }
-            return Container();
-          },
-        );
-      } on PlatformException catch (e) {
-        print('Failed to pick image: $e');
-      }
-    }
-
-    // Upload Image
-    // ignore: unused_local_variable
-    File? imageUpload;
-    Future uploadImage() async {
-      try {
-        // Source: Camera
-        final image =
-            await ImagePicker().pickImage(source: ImageSource.gallery);
-        if (image == null) return;
-        final imageTemp = File(image.path);
-        setState(() => this.image = imageTemp);
-
-        // Loading before showing info page
-        Navigator.push(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(builder: (context) => const LoadingPage()),
-        );
-
-        return FutureBuilder(
-          future: Future.delayed(
-            const Duration(seconds: 3),
-            () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const InfoPage();
-                  },
-                ),
-                (route) => false,
-              );
-            },
-          ),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return const LoadingPage();
-            }
-            return Container();
-          },
-        );
-      } on PlatformException catch (e) {
-        print('Failed to pick image: $e');
-      }
-    }
-
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
