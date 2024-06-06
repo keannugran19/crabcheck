@@ -1,14 +1,12 @@
 class Crab {
-  String crabImage;
-  String edibility;
   String species;
+  String edibility;
   String localName;
   String description;
 
   Crab({
-    required this.crabImage,
-    required this.edibility,
     required this.species,
+    required this.edibility,
     required this.localName,
     required this.description,
   });

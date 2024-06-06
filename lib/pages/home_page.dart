@@ -84,9 +84,9 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(
               builder: (context) {
                 return InfoPage(
+                  filePath: filePath,
                   label: label,
                   confidence: confidence,
-                  filePath: filePath,
                 );
               },
             ),
@@ -152,9 +152,9 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(
               builder: (context) {
                 return InfoPage(
+                  filePath: filePath,
                   label: label,
                   confidence: confidence,
-                  filePath: filePath,
                 );
               },
             ),
