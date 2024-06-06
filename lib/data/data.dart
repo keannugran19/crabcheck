@@ -5,7 +5,7 @@ final charybdisFeriatus = Crab(
     edibility: "Edible!",
     localName: "Crucifix Crab",
     description:
-        """Charybdis feriata is a crab that grows to about 20 cm (8 inches) wide. It has a fan-shaped, smooth carapace with granular lines, six triangular teeth on the front, and six larger teeth on each side. The eyes are close together. The cheliped carpus has three spines, and smaller spines are on other joints. The paddle-shaped hind legs aid in swimming. The carapace is cream and brown with a distinctive white cross, and the pincers and legs are brown with white patches and bands.""");
+        """Charybdis feriata is a crab that grows to about 20 cm (8 inches) wide, with a fan-shaped, smooth carapace featuring granular lines and a pattern in cream and brown with a distinctive white cross. It has six triangular teeth on the front, six larger teeth on each side, and close-set eyes. The chelipeds have three spines on the carpus, smaller spines on other joints, and the paddle-shaped hind legs aid in swimming.""");
 
 final zosimusAeneus = Crab(
     species: "ZosimusAeneus",
@@ -26,4 +26,4 @@ final charybdisNatotor = Crab(
     edibility: "Edible!",
     localName: "Kantugas",
     description:
-        """Charybdis natator has a fan-shaped carapace, brown to orange on top and bluish with white and pale red spots underneath. The legs are dark reddish-brown. The carapace features short hairs except on the front ridges, with six spines on each side and eight small lobes between close-set eyes. The chelipeds have black tips, blue spots, and three spines on the front and one on the back of the merus. The crab can grow up to 17 cm long.""");
+        """Charybdis natator has a fan-shaped carapace, brown to orange on top and bluish with white and pale red spots underneath, with dark reddish-brown legs. It features six spines on each side, eight small lobes between close-set eyes, and short hairs except on the front ridges. The chelipeds have black tips, blue spots, and three spines on the front and one on the back of the merus, and the crab can grow up to 17 cm long.""");

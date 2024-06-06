@@ -15,7 +15,18 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
+      label: Text(
+        buttonText,
+        style: TextStyle(
+          fontSize: 15,
+          color: colorScheme.background,
+        ),
+      ),
+      icon: const Icon(
+        Icons.add_location_alt_outlined,
+        color: Colors.white,
+      ),
       onPressed: onPressed,
       style: ButtonStyle(
         fixedSize: MaterialStateProperty.all(
@@ -37,13 +48,6 @@ class Button extends StatelessWidget {
           // Return the default color for the button
           return buttonColor ?? colorScheme.secondary;
         }),
-      ),
-      child: Text(
-        buttonText,
-        style: TextStyle(
-          fontSize: 15,
-          color: colorScheme.background,
-        ),
       ),
     );
   }

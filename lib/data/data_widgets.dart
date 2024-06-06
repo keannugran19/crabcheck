@@ -20,93 +20,102 @@ class CharybdisFeriatus extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            // Image Container
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 10, 0.0, 0.0),
-                child: Container(
-                  height: size.height * 0.3,
-                  width: size.width * 0.9,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          15) // Adjust the radius as needed
+      child: Column(
+        children: <Widget>[
+          // Image Container
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 10, 0.0, 0.0),
+              child: Container(
+                height: size.height * 0.3,
+                width: size.width * 0.9,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(15) // Adjust the radius as needed
+                    ),
+                child: filePath == null
+                    ? const Text('')
+                    : Image.file(
+                        filePath!,
+                        fit: BoxFit.fill,
                       ),
-                  child: filePath == null
-                      ? const Text('')
-                      : Image.file(
-                          filePath!,
-                          fit: BoxFit.fill,
-                        ),
-                ),
               ),
             ),
+          ),
 
-            const SizedBox(
-              height: 20,
+          const SizedBox(
+            height: 20,
+          ),
+
+          Text(
+            "The Accuracy is ${confidence.toStringAsFixed(0)}%",
+            style: const TextStyle(
+              fontSize: 18,
             ),
+          ),
 
-            Text(
-              "The Accuracy is ${confidence.toStringAsFixed(0)}%",
+          Text(charybdisFeriatus.edibility,
               style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: Colors.green,
+              )),
 
-            Text(charybdisFeriatus.edibility,
+          const SizedBox(
+            height: 5,
+          ),
+
+          Text("Species: $label",
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+                color: Colors.black,
+              )),
+
+          Text("Local name: ${charybdisFeriatus.localName}",
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+                color: Colors.black,
+              )),
+
+          Padding(
+            padding: const EdgeInsets.fromLTRB(25, 5, 25, 0.0),
+            child: Text(charybdisFeriatus.description,
+                textAlign: TextAlign.justify,
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Colors.green,
-                )),
-
-            const SizedBox(
-              height: 5,
-            ),
-
-            Text("Species: $label",
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
+                  fontSize: 15,
                   color: Colors.black,
                 )),
+          ),
 
-            Text("Local name: ${charybdisFeriatus.localName}",
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  color: Colors.black,
-                )),
+          const SizedBox(
+            height: 30,
+          ),
 
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25, 5, 25, 0.0),
-              child: Text(charybdisFeriatus.description,
-                  textAlign: TextAlign.justify,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  )),
+          // Button Back to Home
+          Button(
+              buttonText: "Tag to Map",
+              buttonColor: colorScheme.primary,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
+              }),
+
+          // Text permission to use user's location
+          const SizedBox(
+            height: 50,
+            width: 174,
+            child: Text(
+              textAlign: TextAlign.center,
+              "Allow us to use your location to improve CAGRO's data.",
+              style: TextStyle(fontSize: 11),
             ),
-
-            const SizedBox(
-              height: 30,
-            ),
-
-            // Button Back to Home
-            Button(
-                buttonText: "Back to Home",
-                buttonColor: colorScheme.secondary,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                })
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -203,14 +212,25 @@ class CharybdisNatotor extends StatelessWidget {
 
             // Button Back to Home
             Button(
-                buttonText: "Back to Home",
-                buttonColor: colorScheme.secondary,
+                buttonText: "Tag to Map",
+                buttonColor: colorScheme.primary,
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const HomePage()),
                   );
-                })
+                }),
+
+            // Text permission to use user's location
+            const SizedBox(
+              height: 50,
+              width: 174,
+              child: Text(
+                textAlign: TextAlign.center,
+                "Allow us to use your location to improve CAGRO's data.",
+                style: TextStyle(fontSize: 11),
+              ),
+            )
           ],
         ),
       ),
@@ -273,7 +293,7 @@ class ZosimusAeneus extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
-                  color: Colors.green,
+                  color: Colors.red,
                 )),
 
             const SizedBox(
@@ -310,14 +330,25 @@ class ZosimusAeneus extends StatelessWidget {
 
             // Button Back to Home
             Button(
-                buttonText: "Back to Home",
-                buttonColor: colorScheme.secondary,
+                buttonText: "Tag to Map",
+                buttonColor: colorScheme.primary,
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const HomePage()),
                   );
-                })
+                }),
+
+            // Text permission to use user's location
+            const SizedBox(
+              height: 50,
+              width: 174,
+              child: Text(
+                textAlign: TextAlign.center,
+                "Allow us to use your location to improve CAGRO's data.",
+                style: TextStyle(fontSize: 11),
+              ),
+            )
           ],
         ),
       ),
@@ -417,14 +448,25 @@ class PortunosPelagicus extends StatelessWidget {
 
             // Button Back to Home
             Button(
-                buttonText: "Back to Home",
-                buttonColor: colorScheme.secondary,
+                buttonText: "Tag to Map",
+                buttonColor: colorScheme.primary,
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const HomePage()),
                   );
-                })
+                }),
+
+            // Text permission to use user's location
+            const SizedBox(
+              height: 50,
+              width: 174,
+              child: Text(
+                textAlign: TextAlign.center,
+                "Allow us to use your location to improve CAGRO's data.",
+                style: TextStyle(fontSize: 11),
+              ),
+            )
           ],
         ),
       ),
