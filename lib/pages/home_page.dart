@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _tfLteInit() async {
     String? res = await Tflite.loadModel(
-        model: "lib/assets/model/model_unquant.tflite",
+        model: "lib/assets/model/densenet169.tflite",
         labels: "lib/assets/model/labels.txt",
         numThreads: 1, // defaults to 1
         isAsset:

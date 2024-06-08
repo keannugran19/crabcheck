@@ -48,6 +48,8 @@ class InfoPage extends StatelessWidget {
           confidence: confidence,
           label: label,
         );
+      case 'Not Valid':
+        crabInfo = const InvalidData();
         break;
       default:
         const InvalidData();
