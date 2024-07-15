@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _tfLteInit() async {
     // ignore: unused_local_variable
     String? res = await Tflite.loadModel(
-        model: "lib/assets/model/my_model.tflite",
+        model: "lib/assets/model/DenseNetCrabv1.tflite",
         labels: "lib/assets/model/labels.txt",
         numThreads: 1, // defaults to 1
         isAsset:

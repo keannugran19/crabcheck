@@ -479,8 +479,11 @@ class InvalidData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Invalid Data"),
+    return Center(
+      child: Text(
+        "This image is invalid!",
+        style: TextStyle(color: colorScheme.primary, fontSize: 30),
+      ),
     );
   }
 }
