@@ -49,10 +49,14 @@ class InfoPage extends StatelessWidget {
           label: label,
         );
       case 'Not Valid':
-        crabInfo = const InvalidData();
+        crabInfo = InvalidData(
+          filePath: filePath,
+        );
         break;
       default:
-        const InvalidData();
+        InvalidData(
+          filePath: filePath,
+        );
     }
     return Scaffold(
       appBar: AppBar(
