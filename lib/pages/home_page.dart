@@ -1,15 +1,14 @@
-import 'dart:io';
-import 'dart:developer' as devtools;
-
 import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/howtouse_page.dart';
-import 'package:crabcheck/pages/info_page.dart';
-import 'package:crabcheck/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/components/home_button.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:crabcheck/pages/info_page.dart';
+import 'package:crabcheck/pages/loading_page.dart';
+import 'dart:io';
+import 'dart:developer' as devtools;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,21 +18,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // variables for model result
   File? filePath;
   String label = '';
   double confidence = 0.0;
 
+  // run the model
   Future<void> _tfLteInit() async {
     // ignore: unused_local_variable
     String? res = await Tflite.loadModel(
         model: "lib/assets/model/DenseNetCrabv1.tflite",
         labels: "lib/assets/model/labels.txt",
-        numThreads: 1, // defaults to 1
-        isAsset:
-            true, // defaults to true, set to false to load resources outside assets
-        useGpuDelegate:
-            false // defaults to false, set to true to use GPU delegate
-        );
+        numThreads: 1,
+        isAsset: true,
+        useGpuDelegate: false);
   }
 
 // Upload Image
@@ -50,6 +48,7 @@ class _HomePageState extends State<HomePage> {
       filePath = imageMap;
     });
 
+    // run the model on the image uploaded
     var recognitions = await Tflite.runModelOnImage(
         path: image.path, // required
         imageMean: 0.0, // defaults to 117.0
@@ -59,6 +58,7 @@ class _HomePageState extends State<HomePage> {
         asynch: true // defaults to true
         );
 
+    // determine the accuracy and label
     if (recognitions == null) {
       devtools.log("recognitions is Null");
       return;
@@ -76,6 +76,7 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(builder: (context) => const LoadingPage()),
     );
 
+    // implement the loading
     return FutureBuilder(
       future: Future.delayed(
         const Duration(seconds: 3),
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // capture via camera
+// capture via camera
   captureImage() async {
     final ImagePicker picker = ImagePicker();
 // Pick an image.
@@ -118,6 +119,7 @@ class _HomePageState extends State<HomePage> {
       filePath = imageMap;
     });
 
+    // run the model on image captured
     var recognitions = await Tflite.runModelOnImage(
         path: image.path, // required
         imageMean: 0.0, // defaults to 117.0
@@ -127,6 +129,7 @@ class _HomePageState extends State<HomePage> {
         asynch: true // defaults to true
         );
 
+    // determine the accuracy and label
     if (recognitions == null) {
       devtools.log("recognitions is Null");
       return;
@@ -172,20 +175,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // dispose the model
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     Tflite.close();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tfLteInit();
   }
 
+  // HomePage user interface
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
