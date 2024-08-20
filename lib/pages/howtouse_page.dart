@@ -8,7 +8,7 @@ class HowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: colorScheme.background,
+          backgroundColor: colorScheme.surface,
           title: const Text(
             "How to use our app?",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),

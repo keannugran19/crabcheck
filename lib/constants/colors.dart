@@ -12,8 +12,6 @@ const colorScheme = ColorScheme(
   onPrimary: primaryColor,
   secondary: secondaryColor,
   onSecondary: secondaryColor,
-  background: backgroundColor,
-  onBackground: textColor,
   surface: backgroundColor,
   onSurface: textColor,
   error: Brightness.light == Brightness.light

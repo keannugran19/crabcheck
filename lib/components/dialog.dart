@@ -4,6 +4,7 @@ class DialogBox extends StatefulWidget {
   const DialogBox({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _DialogBoxState createState() => _DialogBoxState();
 }
 

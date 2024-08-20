@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:crabcheck/components/button.dart';
+import 'package:crabcheck/components/tag_button.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/data/data.dart';
 import 'package:crabcheck/pages/home_page.dart';
@@ -95,15 +95,7 @@ class CharybdisFeriatus extends StatelessWidget {
           ),
 
           // Button Back to Home
-          Button(
-              buttonText: "Tag to Map",
-              buttonColor: colorScheme.primary,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              }),
+          const TagButton(),
 
           // Text permission to use user's location
           const SizedBox(
@@ -211,15 +203,7 @@ class CharybdisNatotor extends StatelessWidget {
             ),
 
             // Button Back to Home
-            Button(
-                buttonText: "Tag to Map",
-                buttonColor: colorScheme.primary,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                }),
+            const TagButton(),
 
             // Text permission to use user's location
             const SizedBox(
@@ -329,15 +313,7 @@ class ZosimusAeneus extends StatelessWidget {
             ),
 
             // Button Back to Home
-            Button(
-                buttonText: "Tag to Map",
-                buttonColor: colorScheme.primary,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                }),
+            const TagButton(),
 
             // Text permission to use user's location
             const SizedBox(
@@ -447,15 +423,7 @@ class PortunosPelagicus extends StatelessWidget {
             ),
 
             // Button Back to Home
-            Button(
-                buttonText: "Tag to Map",
-                buttonColor: colorScheme.primary,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                }),
+            const TagButton(),
 
             // Text permission to use user's location
             const SizedBox(
@@ -561,18 +529,18 @@ class InvalidData extends StatelessWidget {
                 );
               },
               style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(
+                fixedSize: WidgetStateProperty.all(
                   const Size(174, 50), // Set the desired width and height
                 ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         8.0), // Set your desired border radius
                   ),
                 ),
-                backgroundColor: MaterialStateProperty.resolveWith(
-                    (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.pressed)) {
+                backgroundColor:
+                    WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+                  if (states.contains(WidgetState.pressed)) {
                     // Return the color when the button is pressed
                     return colorScheme.primary.withOpacity(0.5);
                   }

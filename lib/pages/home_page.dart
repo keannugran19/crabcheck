@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colorScheme.background,
+        backgroundColor: colorScheme.surface,
       ),
       drawer: Drawer(
         child: ListView(

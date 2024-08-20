@@ -18,18 +18,18 @@ class HomeButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all(
+        fixedSize: WidgetStateProperty.all(
           const Size(300, 60), // Set the desired width and height
         ),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius:
                 BorderRadius.circular(8.0), // Set your desired border radius
           ),
         ),
         backgroundColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.pressed)) {
             // Return the color when the button is pressed
             return buttonColor?.withOpacity(0.5) ??
                 colorScheme.secondary.withOpacity(0.5);
@@ -42,7 +42,7 @@ class HomeButton extends StatelessWidget {
         buttonText,
         style: TextStyle(
           fontSize: 30,
-          color: colorScheme.background,
+          color: colorScheme.surface,
         ),
       ),
     );
