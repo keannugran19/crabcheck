@@ -24,9 +24,9 @@ class _DialogBoxState extends State<DialogBox> {
         content: const Text(
             """1.) Ensure that your camera lens is clean and free from dirt, as any impurities can negatively impact the image quality.
 
-2.) Be sure to position the crab thoroughly within the camera frame when capturing it. This ensures greater accuracy in your images.
+2.) Before CAPTURING, be sure to position the crab thoroughly within the camera frame when capturing it. This ensures greater accuracy in your images.
 
-3.) Before uploading, make sure to crop the image so that it thoroughly captures the crab. This step ensures greater accuracy in your results.
+3.) Before UPLOADING, make sure to crop the image so that it thoroughly captures the crab. This step ensures greater accuracy in your results.
           """),
         actions: <Widget>[
           TextButton(
