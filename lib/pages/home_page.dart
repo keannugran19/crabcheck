@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> {
     _tfLteInit();
   }
 
-  // HomePage user interface
+  //* HomePage user interface
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -243,7 +243,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ],
-        ), // Populate the Drawer in the next step.
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

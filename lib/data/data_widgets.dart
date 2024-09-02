@@ -20,94 +20,96 @@ class CharybdisFeriatus extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Column(
-        children: <Widget>[
-          // Image Container
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 10, 0.0, 0.0),
-              child: Container(
-                height: size.height * 0.3,
-                width: size.width * 0.9,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(15) // Adjust the radius as needed
-                    ),
-                child: filePath == null
-                    ? const Text('')
-                    : Image.file(
-                        filePath!,
-                        fit: BoxFit.fill,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            // Image Container
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 10, 0.0, 0.0),
+                child: Container(
+                  height: size.height * 0.3,
+                  width: size.width * 0.9,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                          15) // Adjust the radius as needed
                       ),
+                  child: filePath == null
+                      ? const Text('')
+                      : Image.file(
+                          filePath!,
+                          fit: BoxFit.fill,
+                        ),
+                ),
               ),
             ),
-          ),
 
-          const SizedBox(
-            height: 20,
-          ),
-
-          Text(
-            "The Accuracy is ${confidence.toStringAsFixed(0)}%",
-            style: const TextStyle(
-              fontSize: 18,
+            const SizedBox(
+              height: 20,
             ),
-          ),
 
-          Text(charybdisFeriatus.edibility,
+            Text(
+              "The Accuracy is ${confidence.toStringAsFixed(0)}%",
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                color: Colors.green,
-              )),
+                fontSize: 18,
+              ),
+            ),
 
-          const SizedBox(
-            height: 5,
-          ),
-
-          Text("Species: $label",
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-                color: Colors.black,
-              )),
-
-          Text("Local name: ${charybdisFeriatus.localName}",
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-                color: Colors.black,
-              )),
-
-          Padding(
-            padding: const EdgeInsets.fromLTRB(25, 5, 25, 0.0),
-            child: Text(charybdisFeriatus.description,
-                textAlign: TextAlign.justify,
+            Text(charybdisFeriatus.edibility,
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.green,
+                )),
+
+            const SizedBox(
+              height: 5,
+            ),
+
+            Text("Species: $label",
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
                   color: Colors.black,
                 )),
-          ),
 
-          const SizedBox(
-            height: 30,
-          ),
+            Text("Local name: ${charybdisFeriatus.localName}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                  color: Colors.black,
+                )),
 
-          // Button Back to Home
-          const TagButton(),
-
-          // Text permission to use user's location
-          const SizedBox(
-            height: 50,
-            width: 174,
-            child: Text(
-              textAlign: TextAlign.center,
-              "Allow us to use your location to improve CAGRO's data.",
-              style: TextStyle(fontSize: 11),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 5, 25, 0.0),
+              child: Text(charybdisFeriatus.description,
+                  textAlign: TextAlign.justify,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  )),
             ),
-          )
-        ],
+
+            const SizedBox(
+              height: 30,
+            ),
+
+            // Button Back to Home
+            TagButton(label: label),
+
+            // Text permission to use user's location
+            const SizedBox(
+              height: 50,
+              width: 174,
+              child: Text(
+                textAlign: TextAlign.center,
+                "Allow us to use your location to improve CAGRO's data.",
+                style: TextStyle(fontSize: 11),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -203,7 +205,7 @@ class CharybdisNatotor extends StatelessWidget {
             ),
 
             // Button Back to Home
-            const TagButton(),
+            TagButton(label: label),
 
             // Text permission to use user's location
             const SizedBox(
@@ -313,7 +315,7 @@ class ZosimusAeneus extends StatelessWidget {
             ),
 
             // Button Back to Home
-            const TagButton(),
+            TagButton(label: label),
 
             // Text permission to use user's location
             const SizedBox(
@@ -423,7 +425,7 @@ class PortunosPelagicus extends StatelessWidget {
             ),
 
             // Button Back to Home
-            const TagButton(),
+            TagButton(label: label),
 
             // Text permission to use user's location
             const SizedBox(
