@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crabcheck/components/button.dart';
+import 'package:crabcheck/components/tag_dialog.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/constants/location.dart';
 import 'package:crabcheck/pages/home_page.dart';
@@ -59,11 +60,12 @@ class TagButton extends StatelessWidget {
           // add data to collection
           FirebaseFirestore.instance.collection('crabData').add(crab);
 
-          //back to home
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const HomePage()),
-          // );
+          // prompt user after tagging location
+          showDialog(
+            // ignore: use_build_context_synchronously
+            context: context,
+            builder: (BuildContext context) => const TagDialogBox(),
+          );
         });
   }
 }
