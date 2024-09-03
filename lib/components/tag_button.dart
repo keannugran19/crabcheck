@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/constants/colors.dart';
+import 'package:crabcheck/constants/location.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -41,12 +42,17 @@ class TagButton extends StatelessWidget {
     return Button(
         buttonText: "Tag to Map",
         buttonColor: colorScheme.primary,
-        onPressed: () {
+        onPressed: () async {
+          determinePosition();
+
+          final pos = await determinePosition();
+          final loc = GeoPoint(pos.latitude, pos.longitude);
+
           // data format to send to firestore
           final crab = <String, Object>{
             "species": label,
             "edibility": edibility,
-            "location": const GeoPoint(39.19374, 175.96731),
+            "location": loc,
             "timestamp": Timestamp.now()
           };
 
@@ -54,10 +60,10 @@ class TagButton extends StatelessWidget {
           FirebaseFirestore.instance.collection('crabData').add(crab);
 
           //back to home
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const HomePage()),
+          // );
         });
   }
 }

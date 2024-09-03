@@ -1,4 +1,5 @@
 import 'package:crabcheck/components/dialog.dart';
+import 'package:crabcheck/constants/location.dart';
 import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/howtouse_page.dart';
 import 'package:flutter/material.dart';
