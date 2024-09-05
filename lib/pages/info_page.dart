@@ -1,16 +1,21 @@
 import 'dart:io';
 
 import 'package:crabcheck/constants/colors.dart';
-import 'package:crabcheck/data/data_widgets.dart';
+import 'package:crabcheck/pages/crab_pages/invalid_page.dart';
+import 'package:crabcheck/pages/crab_pages/metopograpsus_spp.dart';
+import 'package:crabcheck/pages/crab_pages/portunos_pelagicus.dart';
+import 'package:crabcheck/pages/crab_pages/scylla_serrata.dart';
+import 'package:crabcheck/pages/crab_pages/venitus_latreillei.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
-  const InfoPage(
-      {super.key,
-      required this.label,
-      required this.confidence,
-      this.filePath});
+  const InfoPage({
+    super.key,
+    required this.label,
+    required this.confidence,
+    this.filePath,
+  });
 
   final String label;
   final double confidence;
@@ -22,36 +27,31 @@ class InfoPage extends StatelessWidget {
     // switch case to display crab info
     switch (label) {
       case 'Charybdis Feriatus':
-        crabInfo = CharybdisFeriatus(
-          filePath: filePath,
-          confidence: confidence,
-          label: label,
-        );
-        break;
-      case 'Charybdis Natotor':
-        crabInfo = CharybdisNatotor(
-          filePath: filePath,
+        crabInfo = ScyllaSerrata(
           confidence: confidence,
           label: label,
         );
         break;
       case 'Portunos Pelagicus':
         crabInfo = PortunosPelagicus(
-          filePath: filePath,
           confidence: confidence,
           label: label,
         );
         break;
-      case 'Zosimus Aeneus':
-        crabInfo = ZosimusAeneus(
-          filePath: filePath,
+      case 'Metopograpsus Spp':
+        crabInfo = MetopograpsusSpp(
           confidence: confidence,
           label: label,
         );
-      case 'Not Valid':
-        crabInfo = InvalidData(
-          filePath: filePath,
+        break;
+      case 'Venitus Latreillei':
+        crabInfo = VenitusLatreillei(
+          confidence: confidence,
+          label: label,
         );
+        break;
+      case 'NotValid':
+        crabInfo = const InvalidData();
         break;
       default:
         InvalidData(
