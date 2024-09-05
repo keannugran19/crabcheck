@@ -3,7 +3,6 @@ import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/components/tag_dialog.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/constants/location.dart';
-import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 //* This button is responsible of tagging the location of the user to send to Database > Dashboard

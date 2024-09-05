@@ -17,6 +17,11 @@ class _TagDialogBoxState extends State<TagDialogBox> {
     });
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   void _showDialog() {
     showDialog<String>(
       context: context,
