@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+// access collection
+CollectionReference collectionRef =
+    FirebaseFirestore.instance.collection('userReports');
 
 class ReportDialog extends StatefulWidget {
   const ReportDialog({super.key});
@@ -106,7 +111,19 @@ class _ReportDialogState extends State<ReportDialog> {
 
           // Done button
           TextButton(
-            onPressed: () {
+            onPressed: () async {
+// data format to send to firestore
+              final userReport = {
+                "innacurate": imageChecked,
+                "uiBug": interfaceChecked,
+                "others": othersChecked,
+                "specify": specifyField.text,
+                "timestamp": Timestamp.now()
+              };
+
+// add data to collection
+              collectionRef.add(userReport);
+
               Navigator.pop(context);
             },
             child: const Text('Done'),
