@@ -28,13 +28,16 @@ class TagButton extends StatelessWidget {
       case "Charybdis Feriatus":
         edibility = "Edible";
         break;
-      case 'Charybdis Natotor':
+      case 'Scylla Serrata':
         edibility = "Edible";
+        break;
+      case 'Venitus Latreillei':
+        edibility = "Inedible";
         break;
       case 'Portunos Pelagicus':
         edibility = "Edible";
         break;
-      case 'Zosimus Aeneus':
+      case 'Metopograpsus Spp':
         edibility = "Inedible";
       default:
     }

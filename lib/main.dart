@@ -18,7 +18,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       theme: ThemeData(
-          fontFamily: 'Poppins', scaffoldBackgroundColor: backgroundColor),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          fontFamily: 'Poppins',
+          scaffoldBackgroundColor: backgroundColor),
     );
   }
 }

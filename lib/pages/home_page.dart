@@ -1,5 +1,4 @@
 import 'package:crabcheck/components/dialog.dart';
-import 'package:crabcheck/constants/location.dart';
 import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/howtouse_page.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _tfLteInit() async {
     // ignore: unused_local_variable
     String? res = await Tflite.loadModel(
-        model: "lib/assets/model/DenseNetv12.tflite",
+        model: "lib/assets/model/model_unquant.tflite",
         labels: "lib/assets/model/labels.txt",
         numThreads: 1,
         isAsset: true,
@@ -88,7 +87,6 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(
               builder: (context) {
                 return InfoPage(
-                  filePath: filePath,
                   label: label,
                   confidence: confidence,
                 );

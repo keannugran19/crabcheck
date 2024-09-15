@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crabcheck/components/report_button.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/pages/crab_pages/invalid_page.dart';
 import 'package:crabcheck/pages/crab_pages/metopograpsus_spp.dart';
@@ -26,7 +27,7 @@ class InfoPage extends StatelessWidget {
     late Widget crabInfo;
     // switch case to display crab info
     switch (label) {
-      case 'Charybdis Feriatus':
+      case 'Scylla Serrata':
         crabInfo = ScyllaSerrata(
           confidence: confidence,
           label: label,
@@ -74,6 +75,12 @@ class InfoPage extends StatelessWidget {
           "Result",
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 15.0),
+            child: ReportButton(),
+          )
+        ],
       ),
       body: crabInfo,
     );
