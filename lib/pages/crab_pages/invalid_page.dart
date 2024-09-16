@@ -103,9 +103,9 @@ class InvalidData extends StatelessWidget {
                 return colorScheme.primary;
               }),
             ),
-            child: const Text(
+            child: Text(
               "Return to Home",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: colorScheme.surface),
             ),
           ),
 
