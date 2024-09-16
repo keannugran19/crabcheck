@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // variables for model result
-  File? filePath;
+  late File filePath;
   String label = '';
   double confidence = 0.0;
 
@@ -87,6 +87,7 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(
               builder: (context) {
                 return InfoPage(
+                  filePath: filePath,
                   label: label,
                   confidence: confidence,
                 );

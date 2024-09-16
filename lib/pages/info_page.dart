@@ -15,12 +15,12 @@ class InfoPage extends StatelessWidget {
     super.key,
     required this.label,
     required this.confidence,
-    this.filePath,
+    required this.filePath,
   });
 
   final String label;
   final double confidence;
-  final File? filePath;
+  final File filePath;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class InfoPage extends StatelessWidget {
         );
         break;
       case 'NotValid':
-        crabInfo = const InvalidData();
+        crabInfo = InvalidData(filePath: filePath);
         break;
       default:
         InvalidData(
