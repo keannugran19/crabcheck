@@ -4,7 +4,6 @@ class DialogBox extends StatefulWidget {
   const DialogBox({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _DialogBoxState createState() => _DialogBoxState();
 }
 
@@ -12,6 +11,7 @@ class _DialogBoxState extends State<DialogBox> {
   @override
   void initState() {
     super.initState();
+    // Show the dialog after the first frame is rendered
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showDialog();
     });
@@ -21,20 +21,27 @@ class _DialogBoxState extends State<DialogBox> {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text("Before using the App:"),
+        title: const Text(
+          "Before using the App:",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        ),
         content: const Text(
-            """1.) Ensure that your camera lens is clean and free from dirt, as any impurities can negatively impact the image quality.
+          """1.) Ensure that your camera lens is clean and free from dirt, as any impurities can negatively impact the image quality.
 
-2.) Before CAPTURING, be sure to position the crab thoroughly within the camera frame when capturing it. This ensures greater accuracy in your images.
+2.) Before CAPTURING, be sure to position the crab thoroughly within the camera frame. This ensures greater accuracy in your images.
 
-3.) Before UPLOADING, make sure to crop the image so that it thoroughly captures the crab. This step ensures greater accuracy in your results.
-          """),
+3.) Before UPLOADING, make sure to crop the image so that it thoroughly captures the crab. This step ensures greater accuracy in your results.""",
+          style: TextStyle(fontSize: 15, height: 1.5), // Improved readability
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.pop(context, 'Got It!');
             },
-            child: const Text('Got It!'),
+            child: const Text(
+              'Got It!',
+              style: TextStyle(color: Colors.blueAccent, fontSize: 15),
+            ),
           ),
         ],
       ),
@@ -43,6 +50,6 @@ class _DialogBoxState extends State<DialogBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(); // Empty container as no UI is needed here
+    return const SizedBox.shrink(); // Return an empty, invisible widget
   }
 }

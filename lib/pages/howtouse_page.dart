@@ -6,34 +6,53 @@ class HowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textStyle = const TextStyle(
+      fontSize: 20,
+      height: 1.5, // Improved line height for readability
+    );
+    var space = const SizedBox(height: 20);
+
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: colorScheme.surface,
-          title: const Text(
-            "How to use our app?",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          )),
-      body: const SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-              child: Text(
-                """Step 1. If you found a crab, take a picture of the crab using the capture button. However, if you already have your own picture in your gallery, upload the photo using the upload button.
-
-Step 2. Wait for the image to process.
-
-Step 3. The result will pop up and will classify the crab species and it's edibility.
-
-    Step 3.1 We ask for your permission to use your location by clicking the 'Tag to Map' button to send the data to our CAGRO Fisheries section for mapping.
-                """,
-                style: TextStyle(fontSize: 20, height: 2),
-              ),
-            )
-          ],
+        backgroundColor: colorScheme.surface,
+        title: const Text(
+          "How to use our app?",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      )),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          child: Column(
+            crossAxisAlignment:
+                CrossAxisAlignment.start, // Align text to the left
+            children: [
+              Text(
+                "Step 1. If you found a crab, take a picture using the capture button. Alternatively, if you already have a picture in your gallery, upload the photo using the upload button.",
+                style: textStyle,
+              ),
+              space,
+              Text(
+                "Step 2. Wait for the image to process.",
+                style: textStyle,
+              ),
+              space,
+              Text(
+                "Step 3. The result will pop up, classifying the crab species and its edibility.",
+                style: textStyle,
+              ),
+              space,
+              Text(
+                "Step 3.1. You will be asked for permission to use your location. By clicking the 'Tag to Map' button, the data will be sent to the CAGRO Fisheries section for mapping.",
+                style: textStyle,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

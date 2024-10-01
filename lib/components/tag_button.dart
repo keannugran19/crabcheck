@@ -2,16 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/components/tag_dialog.dart';
 import 'package:crabcheck/constants/colors.dart';
-import 'package:crabcheck/constants/location.dart';
+import 'package:crabcheck/model/location.dart';
 import 'package:flutter/material.dart';
 
 //* This button is responsible of tagging the location of the user to send to Database > Dashboard
 
-// access collection
-CollectionReference collectionRef =
-    FirebaseFirestore.instance.collection('crabData');
-
-class TagButton extends StatelessWidget {
+class TagButton extends StatefulWidget {
   final String label;
 
   const TagButton({
@@ -20,54 +16,83 @@ class TagButton extends StatelessWidget {
   });
 
   @override
+  State<TagButton> createState() => _TagButtonState();
+}
+
+class _TagButtonState extends State<TagButton> {
+  bool _isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
-    // switch to determine edibility
-    String edibility = "";
+    // Determine edibility based on label
+    String edibility = _determineEdibility(widget.label);
 
-    switch (label) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Button(
+          buttonText: "Tag to Map",
+          buttonColor: colorScheme.primary,
+          onPressed: () async {
+            setState(() {
+              _isLoading = true; // Start loading
+            });
+
+            try {
+              // Determine the position
+              final pos = await determinePosition();
+              final loc = GeoPoint(pos.latitude, pos.longitude);
+
+              // Data to send to Firestore
+              final crab = <String, Object>{
+                "species": widget.label,
+                "edibility": edibility,
+                "location": loc,
+                "timestamp": Timestamp.now(),
+              };
+
+              // Add data to Firestore collection
+              await FirebaseFirestore.instance.collection('crabData').add(crab);
+
+              // After successful addition, show the dialog
+              if (mounted) {
+                _showSuccessDialog();
+              }
+            } catch (e) {
+              // Handle any errors here
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Failed to tag location: $e')),
+              );
+            } finally {
+              setState(() {
+                _isLoading = false; // Stop loading
+              });
+            }
+          },
+        ),
+        if (_isLoading) const CircularProgressIndicator(),
+      ],
+    );
+  }
+
+  String _determineEdibility(String species) {
+    switch (species) {
       case "Charybdis Feriatus":
-        edibility = "Edible";
-        break;
       case 'Scylla Serrata':
-        edibility = "Edible";
-        break;
-      case 'Venitus Latreillei':
-        edibility = "Inedible";
-        break;
       case 'Portunos Pelagicus':
-        edibility = "Edible";
-        break;
+        return "Edible";
+      case 'Venitus Latreillei':
       case 'Metopograpsus Spp':
-        edibility = "Inedible";
+        return "Inedible";
       default:
+        return "Unknown";
     }
+  }
 
-    return Button(
-        buttonText: "Tag to Map",
-        buttonColor: colorScheme.primary,
-        onPressed: () async {
-          determinePosition();
-
-          final pos = await determinePosition();
-          final loc = GeoPoint(pos.latitude, pos.longitude);
-
-          // data format to send to firestore
-          final crab = <String, Object>{
-            "species": label,
-            "edibility": edibility,
-            "location": loc,
-            "timestamp": Timestamp.now()
-          };
-
-          // add data to collection
-          FirebaseFirestore.instance.collection('crabData').add(crab);
-
-          // prompt user after tagging location
-          showDialog(
-            // ignore: use_build_context_synchronously
-            context: context,
-            builder: (BuildContext context) => const TagDialogBox(),
-          );
-        });
+  Future<void> _showSuccessDialog() async {
+    await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => const TagDialogBox(),
+    );
   }
 }

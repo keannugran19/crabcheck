@@ -18,6 +18,16 @@ bool othersChecked = false;
 TextEditingController specifyField = TextEditingController();
 
 class _ReportDialogState extends State<ReportDialog> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Color getColor(Set<WidgetState> states) {
     const Set<WidgetState> interactiveStates = <WidgetState>{
       WidgetState.pressed,
