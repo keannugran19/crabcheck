@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   // Load model once during init
   Future<void> _loadModel() async {
     await Tflite.loadModel(
-      model: "lib/assets/model/model_unquant.tflite",
+      model: "lib/assets/model/model.tflite",
       labels: "lib/assets/model/labels.txt",
       numThreads: 1,
       isAsset: true,
