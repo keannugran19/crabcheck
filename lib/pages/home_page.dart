@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Variables for model result
-  late File filePath;
+  XFile? filePath;
   String label = '';
   double confidence = 0.0;
 
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   // Load model once during init
   Future<void> _loadModel() async {
     await Tflite.loadModel(
-      model: "lib/assets/model/model.tflite",
+      model: "lib/assets/model/mobilenet1.tflite",
       labels: "lib/assets/model/labels.txt",
       numThreads: 1,
       isAsset: true,
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (context) => InfoPage(
-          filePath: filePath,
+          filePath: filePath!,
           label: label,
           confidence: confidence,
         ),
@@ -96,10 +96,11 @@ class _HomePageState extends State<HomePage> {
 
   // Image picker function (common for both upload and capture)
   Future<void> _pickImage(ImageSource source) async {
-    final picker = ImagePicker();
-    final image = await picker.pickImage(source: source);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: source);
     if (image != null) {
-      setState(() => filePath = File(image.path));
+      filePath = image;
+      setState(() {});
       await _processImage(image.path);
     }
   }
