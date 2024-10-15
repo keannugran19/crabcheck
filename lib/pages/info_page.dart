@@ -9,6 +9,7 @@ import 'package:crabcheck/pages/crab_pages/scylla_serrata.dart';
 import 'package:crabcheck/pages/crab_pages/venitus_latreillei.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({
@@ -20,7 +21,7 @@ class InfoPage extends StatelessWidget {
 
   final String label;
   final double confidence;
-  final File filePath;
+  final XFile filePath;
 
   @override
   Widget build(BuildContext context) {
@@ -31,32 +32,36 @@ class InfoPage extends StatelessWidget {
         crabInfo = ScyllaSerrata(
           confidence: confidence,
           label: label,
+          filePath: filePath,
         );
         break;
       case 'Portunos Pelagicus':
         crabInfo = PortunosPelagicus(
           confidence: confidence,
           label: label,
+          filePath: filePath,
         );
         break;
       case 'Metopograpsus Spp':
         crabInfo = MetopograpsusSpp(
           confidence: confidence,
           label: label,
+          filePath: filePath,
         );
         break;
       case 'Venitus Latreillei':
         crabInfo = VenitusLatreillei(
           confidence: confidence,
           label: label,
+          filePath: filePath,
         );
         break;
       case 'NotValid':
-        crabInfo = InvalidData(filePath: filePath);
+        crabInfo = InvalidData(filePath: File(filePath.path));
         break;
       default:
         InvalidData(
-          filePath: filePath,
+          filePath: File(filePath.path),
         );
     }
     return Scaffold(

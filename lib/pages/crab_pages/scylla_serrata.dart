@@ -1,14 +1,19 @@
+import 'dart:io';
+
 import 'package:crabcheck/components/tag_button.dart';
 import 'package:crabcheck/data/data.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ScyllaSerrata extends StatelessWidget {
   final double confidence;
   final String label;
+  final XFile filePath;
   const ScyllaSerrata({
     super.key,
     required this.confidence,
     required this.label,
+    required this.filePath,
   });
 
   @override
@@ -28,8 +33,8 @@ class ScyllaSerrata extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(
-                scyllaSerrata.image,
+              child: Image.file(
+                File(filePath.path),
                 fit: BoxFit.cover,
               ),
             ),
@@ -88,7 +93,10 @@ class ScyllaSerrata extends StatelessWidget {
           ),
 
           // Button Back to Home
-          TagButton(label: label),
+          TagButton(
+            label: label,
+            filePath: filePath,
+          ),
 
           const SizedBox(
             width: 174,
