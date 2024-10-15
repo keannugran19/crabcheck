@@ -1,18 +1,24 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/components/tag_dialog.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/model/location.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 //* This button is responsible of tagging the location of the user to send to Database > Dashboard
 
 class TagButton extends StatefulWidget {
   final String label;
+  final XFile filePath;
 
   const TagButton({
     super.key,
     required this.label,
+    required this.filePath,
   });
 
   @override
@@ -20,59 +26,68 @@ class TagButton extends StatefulWidget {
 }
 
 class _TagButtonState extends State<TagButton> {
+  UploadTask? uploadTask;
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    // Determine edibility based on label
-    String edibility = _determineEdibility(widget.label);
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Button(
-          buttonText: "Tag to Map",
-          buttonColor: colorScheme.primary,
-          onPressed: () async {
-            setState(() {
-              _isLoading = true; // Start loading
-            });
-
-            try {
-              // Determine the position
-              final pos = await determinePosition();
-              final loc = GeoPoint(pos.latitude, pos.longitude);
-
-              // Data to send to Firestore
-              final crab = <String, Object>{
-                "species": widget.label,
-                "edibility": edibility,
-                "location": loc,
-                "timestamp": Timestamp.now(),
-              };
-
-              // Add data to Firestore collection
-              await FirebaseFirestore.instance.collection('crabData').add(crab);
-
-              // After successful addition, show the dialog
-              if (mounted) {
-                _showSuccessDialog();
-              }
-            } catch (e) {
-              // Handle any errors here
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Failed to tag location: $e')),
-              );
-            } finally {
-              setState(() {
-                _isLoading = false; // Stop loading
-              });
-            }
-          },
-        ),
-        if (_isLoading) const CircularProgressIndicator(),
-      ],
+    return Button(
+      buttonText: "Tag to Map",
+      buttonColor: colorScheme.primary,
+      onPressed: _isLoading ? null : _handleTagging,
     );
+  }
+
+  Future<void> _handleTagging() async {
+    setState(() => _isLoading = true);
+
+    // Show the "Please wait" dialog
+    _showLoadingDialog();
+
+    try {
+      // Determine position and upload file
+      final loc = await _getUserLocation();
+      final downloadUrl = await _uploadFile(widget.filePath);
+
+      // Save data to Firestore
+      await _saveToFirestore(loc, downloadUrl);
+
+      // Close loading dialog after upload is complete
+      if (mounted) Navigator.of(context).pop();
+
+      // Show success dialog
+      if (mounted) _showSuccessDialog();
+    } catch (e) {
+      // Close loading dialog in case of an error
+      if (mounted) Navigator.of(context).pop();
+
+      _showErrorSnackBar(e);
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  Future<GeoPoint> _getUserLocation() async {
+    final pos = await determinePosition();
+    return GeoPoint(pos.latitude, pos.longitude);
+  }
+
+  Future<String> _uploadFile(XFile file) async {
+    final ref = FirebaseStorage.instance.ref().child('crabs/${file.name}');
+    uploadTask = ref.putFile(File(file.path));
+    await uploadTask!.whenComplete(() {});
+    return await ref.getDownloadURL();
+  }
+
+  Future<void> _saveToFirestore(GeoPoint location, String imageUrl) async {
+    final crabData = {
+      "species": widget.label,
+      "edibility": _determineEdibility(widget.label),
+      "location": location,
+      "timestamp": Timestamp.now(),
+      "image": imageUrl,
+    };
+    await FirebaseFirestore.instance.collection('crabData').add(crabData);
   }
 
   String _determineEdibility(String species) {
@@ -89,10 +104,36 @@ class _TagButtonState extends State<TagButton> {
     }
   }
 
+  Future<void> _showLoadingDialog() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Uploading Data'),
+          content: const Text(
+              "Please wait while we upload your image, location, and crab data to the CAGRO database. This may take a few moments."),
+          actions: [
+            TextButton(
+              onPressed: () {},
+              child: const Text('Please wait...'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> _showSuccessDialog() async {
     await showDialog<String>(
       context: context,
       builder: (BuildContext context) => const TagDialogBox(),
+    );
+  }
+
+  void _showErrorSnackBar(dynamic error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Failed to tag location: $error')),
     );
   }
 }
