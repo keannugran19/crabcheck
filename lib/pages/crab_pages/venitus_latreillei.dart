@@ -16,9 +16,62 @@ class VenitusLatreillei extends StatelessWidget {
     required this.filePath,
   });
 
+  Widget buildTableCell(String text) {
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      alignment: Alignment.center,
+      child: Text(text),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    var infoTable = LayoutBuilder(
+      builder: (context, constraints) {
+        return Table(
+          border: TableBorder.all(color: Colors.black),
+          columnWidths: const {
+            0: FlexColumnWidth(1),
+            1: FlexColumnWidth(1),
+          },
+          children: [
+            TableRow(
+              children: [
+                buildTableCell('Portunidae'),
+                buildTableCell('Value 1'),
+              ],
+            ),
+            TableRow(
+              children: [
+                buildTableCell('Cancridae'),
+                buildTableCell('Value 2'),
+              ],
+            ),
+            TableRow(
+              children: [
+                buildTableCell('Gecarcinidae'),
+                buildTableCell('Value 3'),
+              ],
+            ),
+            TableRow(
+              children: [
+                buildTableCell('Ocypodidae'),
+                buildTableCell('Value 4'),
+              ],
+            ),
+            TableRow(
+              children: [
+                buildTableCell('Xanthidae'),
+                buildTableCell('Value 5'),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+
     return SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,54 +95,27 @@ class VenitusLatreillei extends StatelessWidget {
 
           const SizedBox(height: 15),
 
+          Column(
+            children: [
+              Text(
+                "The Accuracy is ${confidence.toStringAsFixed(0)}%",
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+              Text(
+                venitusLatreillei.edibility,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+
           // Dynamic scaling text
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text(
-                    "The Accuracy is ${confidence.toStringAsFixed(0)}%",
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    venitusLatreillei.edibility,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      color: Colors.red,
-                    ),
-                  ),
-                  Text(
-                    "Species: $label",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text(
-                    "Local name: ${venitusLatreillei.localName}",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(25, 5, 25, 0.0),
-                    child: Text(
-                      venitusLatreillei.description,
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: SingleChildScrollView(child: infoTable),
           ),
 
           // Button Back to Home
