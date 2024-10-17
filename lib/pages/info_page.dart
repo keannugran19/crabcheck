@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:crabcheck/components/report_button.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/data/data.dart';
-import 'package:crabcheck/pages/crab_pages/invalid_page.dart';
+import 'package:crabcheck/pages/invalid_page.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
