@@ -1,4 +1,5 @@
 import 'package:crabcheck/model/crab_info.dart';
+import 'package:crabcheck/pages/crab_list.dart';
 
 final venitusLatreillei = Crab(
     image: "lib/assets/images/crab/venitusLatreillei.jpeg",
@@ -38,3 +39,19 @@ final scyllaSerrata = Crab(
     habitat: "Deep mud burrows, mangroves",
     appearance:
         "28cm avg. width, green to black in color with smooth carapace");
+
+// Crab data stored in a map for fetching
+final crabInfo = {
+  'Scylla Serrata': scyllaSerrata,
+  'Portunos Pelagicus': portunosPelagicus,
+  'Metopograpsus Spp': metopograpsusSpp,
+  'Venitus Latreillei': venitusLatreillei,
+};
+
+// create a list of crabs
+final List<Crab> crabList = [
+  venitusLatreillei,
+  metopograpsusSpp,
+  portunosPelagicus,
+  scyllaSerrata
+];

@@ -1,5 +1,6 @@
 import 'package:crabcheck/components/dialog.dart';
 import 'package:crabcheck/pages/about_page.dart';
+import 'package:crabcheck/pages/crab_list.dart';
 import 'package:crabcheck/pages/howtouse_page.dart';
 import 'package:flutter/material.dart';
 import 'package:crabcheck/constants/colors.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:crabcheck/pages/info_page.dart';
 import 'package:crabcheck/pages/loading_page.dart';
-import 'dart:io';
 import 'dart:developer' as devtools;
 
 class HomePage extends StatefulWidget {
@@ -150,6 +150,21 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                ListTile(
+                  leading: Icon(Icons.book, color: colorScheme.primary),
+                  title: const Text(
+                    'Crabs List',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const CrabList()),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Divider(color: Colors.grey.shade300, thickness: 1),
+                ),
                 ListTile(
                   leading: Icon(Icons.info_outline, color: colorScheme.primary),
                   title: const Text(

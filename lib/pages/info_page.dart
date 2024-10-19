@@ -38,14 +38,7 @@ class InfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    // Crab data stored in a map to avoid switch-case repetition
-    final crabInfo = {
-      'Scylla Serrata': scyllaSerrata,
-      'Portunos Pelagicus': portunosPelagicus,
-      'Metopograpsus Spp': metopograpsusSpp,
-      'Venitus Latreillei': venitusLatreillei,
-    };
-
+    // fetch the crab map
     final crabData = crabInfo[label];
 
     // redirect if Invalid Crab
@@ -154,10 +147,12 @@ class InfoPage extends StatelessWidget {
                 ),
                 Text(
                   crabData.edibility,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
-                    color: Colors.red,
+                    color: crabData.edibility == "Edible!"
+                        ? Colors.green
+                        : Colors.red,
                   ),
                 ),
               ],
