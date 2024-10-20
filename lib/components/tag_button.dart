@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crabcheck/components/button.dart';
-import 'package:crabcheck/components/tag_dialog.dart';
 import 'package:crabcheck/constants/colors.dart';
+import 'package:crabcheck/model/firebase.dart';
 import 'package:crabcheck/model/location.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +26,9 @@ class TagButton extends StatefulWidget {
 }
 
 class _TagButtonState extends State<TagButton> {
+  // call firebase storage and firestore
+  FirebaseService firestore = FirebaseService();
+
   UploadTask? uploadTask;
   bool _isLoading = false;
 
@@ -73,7 +76,7 @@ class _TagButtonState extends State<TagButton> {
   }
 
   Future<String> _uploadFile(XFile file) async {
-    final ref = FirebaseStorage.instance.ref().child('crabs/${file.name}');
+    final ref = firestore.storage('crabs/${file.name}');
     uploadTask = ref.putFile(File(file.path));
     await uploadTask!.whenComplete(() {});
     return await ref.getDownloadURL();
@@ -87,7 +90,7 @@ class _TagButtonState extends State<TagButton> {
       "timestamp": Timestamp.now(),
       "image": imageUrl,
     };
-    await FirebaseFirestore.instance.collection('crabData').add(crabData);
+    await firestore.crabs.add(crabData);
   }
 
   String _determineEdibility(String species) {
@@ -127,7 +130,27 @@ class _TagButtonState extends State<TagButton> {
   Future<void> _showSuccessDialog() async {
     await showDialog<String>(
       context: context,
-      builder: (BuildContext context) => const TagDialogBox(),
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text(
+          "Success!",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        ),
+        content: const Text(
+          """We’ve successfully tagged the location where you found your crab! Thank you for contributing to the improvement of this application for future users!""",
+          style: TextStyle(fontSize: 15, height: 1.5),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'Done',
+              style: TextStyle(color: Colors.blueAccent, fontSize: 15),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

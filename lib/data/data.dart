@@ -1,5 +1,4 @@
 import 'package:crabcheck/model/crab_info.dart';
-import 'package:crabcheck/pages/crab_list.dart';
 
 final venitusLatreillei = Crab(
     image: "lib/assets/images/crab/venitusLatreillei.jpeg",

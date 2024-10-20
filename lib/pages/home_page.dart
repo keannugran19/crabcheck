@@ -97,7 +97,8 @@ class _HomePageState extends State<HomePage> {
   // Image picker function (common for both upload and capture)
   Future<void> _pickImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: source);
+    final XFile? image =
+        await picker.pickImage(source: source, maxHeight: 224, maxWidth: 224);
     if (image != null) {
       filePath = image;
       setState(() {});
