@@ -39,12 +39,22 @@ final scyllaSerrata = Crab(
     appearance:
         "28cm avg. width, green to black in color with smooth carapace");
 
+final cardisomaCarnifex = Crab(
+    image: "lib/assets/images/crab/cardisomaCarnifex.jpg",
+    species: "Cardisoma Carnifex",
+    edibility: "Inedible!",
+    localName: "Kagang",
+    family: "Gecarcinidae",
+    habitat: "Mangroves, mud burrows",
+    appearance: "20cm avg. width, shades of brown, blue-grey in color");
+
 // Crab data stored in a map for fetching
 final crabInfo = {
   'Scylla Serrata': scyllaSerrata,
   'Portunos Pelagicus': portunosPelagicus,
   'Metopograpsus Spp': metopograpsusSpp,
   'Venitus Latreillei': venitusLatreillei,
+  'Cardisoma Carnifex': cardisomaCarnifex
 };
 
 // create a list of crabs
@@ -52,5 +62,6 @@ final List<Crab> crabList = [
   venitusLatreillei,
   metopograpsusSpp,
   portunosPelagicus,
-  scyllaSerrata
+  scyllaSerrata,
+  cardisomaCarnifex
 ];
