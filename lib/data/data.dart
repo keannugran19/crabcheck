@@ -1,13 +1,14 @@
 import 'package:crabcheck/model/crab_info.dart';
 
 final venitusLatreillei = Crab(
-    image: "lib/assets/images/crab/venitusLatreillei.jpeg",
-    species: "Venitus Latreillei",
-    edibility: "Inedible!",
-    localName: "Giant Sentinel Crab",
-    family: "Macrophthalmidae",
-    habitat: "Burrows in soft mud",
-    appearance: "60mm avg. width, light brown to dark in color");
+  image: "lib/assets/images/crab/venitusLatreillei.jpeg",
+  species: "Venitus Latreillei",
+  edibility: "Inedible!",
+  localName: "Giant Sentinel Crab",
+  family: "Macrophthalmidae",
+  habitat: "Burrows in soft mud",
+  appearance: "60mm avg. width, light brown to dark in color",
+);
 
 final metopograpsusSpp = Crab(
     image: "lib/assets/images/crab/metopograpsusSp.jpeg",
@@ -42,7 +43,7 @@ final scyllaSerrata = Crab(
 final cardisomaCarnifex = Crab(
     image: "lib/assets/images/crab/cardisomaCarnifex.jpg",
     species: "Cardisoma Carnifex",
-    edibility: "Inedible!",
+    edibility: "Edible!",
     localName: "Kagang",
     family: "Gecarcinidae",
     habitat: "Mangroves, mud burrows",

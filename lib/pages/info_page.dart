@@ -89,7 +89,7 @@ class InfoPage extends StatelessWidget {
               _buildTableCell(text: 'Appearance', isTitle: true),
               _buildTableCell(text: crabData.appearance),
             ],
-          ),
+          )
         ],
       ),
     );
