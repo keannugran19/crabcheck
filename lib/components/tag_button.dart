@@ -155,7 +155,7 @@ class _TagButtonState extends State<TagButton> {
             },
             child: const Text(
               'Done',
-              style: TextStyle(color: Colors.blueAccent, fontSize: 15),
+              style: TextStyle(fontSize: 15),
             ),
           ),
         ],

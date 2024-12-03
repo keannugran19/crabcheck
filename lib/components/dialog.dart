@@ -40,7 +40,7 @@ class _DialogBoxState extends State<DialogBox> {
             },
             child: const Text(
               'Got It!',
-              style: TextStyle(color: Colors.blueAccent, fontSize: 15),
+              style: TextStyle(fontSize: 15),
             ),
           ),
         ],
