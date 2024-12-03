@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/constants/colors.dart';
-import 'package:crabcheck/model/firebase.dart';
-import 'package:crabcheck/model/location.dart';
+import 'package:crabcheck/services/location.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../services/firebase.dart';
 
 //* This button is responsible of tagging the location of the user to send to Database > Dashboard
 
@@ -83,13 +85,20 @@ class _TagButtonState extends State<TagButton> {
   }
 
   Future<void> _saveToFirestore(GeoPoint location, String imageUrl) async {
+    // Fetch the address asynchronously
+    final address = await firestore.getAddressFromCoordinates(location);
+
+    // Create the crab data with the fetched address
     final crabData = {
       "species": widget.label,
       "edibility": _determineEdibility(widget.label),
       "location": location,
+      "address": address,
       "timestamp": Timestamp.now(),
       "image": imageUrl,
     };
+
+    // Add the data to Firestore
     await firestore.crabs.add(crabData);
   }
 

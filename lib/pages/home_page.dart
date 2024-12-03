@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     // Delay for 3 seconds after LoadingPage is shown
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
 
     // After the delay, navigate to the InfoPage
     Navigator.pushReplacement(
