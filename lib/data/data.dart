@@ -4,7 +4,7 @@ final venitusLatreillei = Crab(
   image: "lib/assets/images/crab/venitusLatreillei.jpeg",
   species: "Venitus Latreillei",
   edibility: "Inedible!",
-  localName: "Giant Sentinel Crab",
+  localName: "Kasway",
   family: "Macrophthalmidae",
   habitat: "Burrows in soft mud",
   appearance: "60mm avg. width, light brown to dark in color",
@@ -14,7 +14,7 @@ final metopograpsusSpp = Crab(
     image: "lib/assets/images/crab/metopograpsusSp.jpeg",
     species: "Metopograpsus Spp",
     edibility: "Inedible!",
-    localName: "Purple Climber Crab",
+    localName: "Saka-saka",
     family: "Grapsidae",
     habitat: "Mangrove trees, they tend to climb trees at night",
     appearance:
@@ -24,7 +24,7 @@ final portunosPelagicus = Crab(
     image: "lib/assets/images/crab/portunosPelagicus.jpg",
     species: "Portunos Pelagicus",
     edibility: "Edible!",
-    localName: "Lambay or Kasag",
+    localName: "Lambay",
     family: "Portunidae",
     habitat: "Shallow coastal waters, seagrass beds, mangroves",
     appearance:
@@ -34,7 +34,7 @@ final scyllaSerrata = Crab(
     image: "lib/assets/images/crab/scyllaSerrata.jpg",
     species: "Scylla Serrata",
     edibility: "Edible!",
-    localName: "Mud Crab",
+    localName: "Alimango",
     family: "Portunidae",
     habitat: "Deep mud burrows, mangroves",
     appearance:
