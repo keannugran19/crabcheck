@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-// access collection
+// Access collection
 CollectionReference collectionRef =
     FirebaseFirestore.instance.collection('userReports');
 
@@ -18,26 +18,13 @@ bool othersChecked = false;
 TextEditingController specifyField = TextEditingController();
 
 class _ReportDialogState extends State<ReportDialog> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  bool _isButtonEnabled = false;
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  Color getColor(Set<WidgetState> states) {
-    const Set<WidgetState> interactiveStates = <WidgetState>{
-      WidgetState.pressed,
-      WidgetState.hovered,
-      WidgetState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.grey;
-    }
-    return Colors.white;
+  void _updateButtonState() {
+    setState(() {
+      // enable button if any checkbox is selected
+      _isButtonEnabled = imageChecked || interfaceChecked || othersChecked;
+    });
   }
 
   @override
@@ -62,12 +49,16 @@ class _ReportDialogState extends State<ReportDialog> {
             children: [
               Checkbox(
                 checkColor: Colors.black,
-                fillColor: WidgetStateProperty.resolveWith(getColor),
+                fillColor: WidgetStateProperty.resolveWith((states) =>
+                    states.contains(WidgetState.pressed)
+                        ? Colors.grey
+                        : Colors.white),
                 value: imageChecked,
                 onChanged: (bool? value) {
                   setState(() {
                     imageChecked = value!;
                   });
+                  _updateButtonState();
                 },
               ),
               const Text("Result is Inaccurate")
@@ -79,12 +70,16 @@ class _ReportDialogState extends State<ReportDialog> {
             children: [
               Checkbox(
                 checkColor: Colors.black,
-                fillColor: WidgetStateProperty.resolveWith(getColor),
+                fillColor: WidgetStateProperty.resolveWith((states) =>
+                    states.contains(WidgetState.pressed)
+                        ? Colors.grey
+                        : Colors.white),
                 value: interfaceChecked,
                 onChanged: (bool? value) {
                   setState(() {
                     interfaceChecked = value!;
                   });
+                  _updateButtonState();
                 },
               ),
               const Text("User Interface bug")
@@ -96,12 +91,16 @@ class _ReportDialogState extends State<ReportDialog> {
             children: [
               Checkbox(
                 checkColor: Colors.black,
-                fillColor: WidgetStateProperty.resolveWith(getColor),
+                fillColor: WidgetStateProperty.resolveWith((states) =>
+                    states.contains(WidgetState.pressed)
+                        ? Colors.grey
+                        : Colors.white),
                 value: othersChecked,
                 onChanged: (bool? value) {
                   setState(() {
                     othersChecked = value!;
                   });
+                  _updateButtonState();
                 },
               ),
               const Text("Others")
@@ -121,21 +120,23 @@ class _ReportDialogState extends State<ReportDialog> {
 
           // Done button
           TextButton(
-            onPressed: () async {
-// data format to send to firestore
-              final userReport = {
-                "innacurate": imageChecked,
-                "uiBug": interfaceChecked,
-                "others": othersChecked,
-                "specify": specifyField.text,
-                "timestamp": Timestamp.now()
-              };
+            onPressed: _isButtonEnabled
+                ? () async {
+                    // Data format to send to Firestore
+                    final userReport = {
+                      "innacurate": imageChecked,
+                      "uiBug": interfaceChecked,
+                      "others": othersChecked,
+                      "specify": specifyField.text,
+                      "timestamp": Timestamp.now()
+                    };
 
-// add data to collection
-              collectionRef.add(userReport);
+                    // Add data to collection
+                    await collectionRef.add(userReport);
 
-              Navigator.pop(context);
-            },
+                    Navigator.pop(context);
+                  }
+                : null, // Disable button when no checkbox is selected
             child: const Text('Done'),
           ),
         ],
