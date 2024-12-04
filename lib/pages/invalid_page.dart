@@ -64,7 +64,7 @@ class InvalidData extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Text("This image is invalid!",
+                    Text("Unclassified",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,

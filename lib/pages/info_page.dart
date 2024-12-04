@@ -37,7 +37,7 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // valid confidence
-    const double validConfidence = 94.0;
+    const double validConfidence = 90.0;
     Size size = MediaQuery.of(context).size;
 
     // fetch the crab map

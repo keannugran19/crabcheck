@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   // Load model once during init
   Future<void> _loadModel() async {
     await Tflite.loadModel(
-      model: "lib/assets/model/mobileNet.tflite",
+      model: "lib/assets/model/test17.tflite",
       labels: "lib/assets/model/labels.txt",
       numThreads: 1,
       isAsset: true,
@@ -51,10 +51,10 @@ class _HomePageState extends State<HomePage> {
   Future<void> _processImage(String path) async {
     var recognitions = await Tflite.runModelOnImage(
       path: path,
-      imageMean: 0.0,
-      imageStd: 255.0,
-      numResults: 2,
-      threshold: 0.2,
+      imageMean: 127.5,
+      imageStd: 127.5,
+      numResults: 6,
+      threshold: 0.5,
       asynch: true,
     );
 
