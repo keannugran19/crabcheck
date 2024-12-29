@@ -121,16 +121,10 @@ class _TagButtonState extends State<TagButton> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Uploading Data'),
-          content: const Text(
+        return const AlertDialog(
+          title: Text('Uploading Data'),
+          content: Text(
               "Please wait while we upload your image, location, and crab data to the CAGRO database. This may take a few moments."),
-          actions: [
-            TextButton(
-              onPressed: () {},
-              child: const Text('Please wait...'),
-            ),
-          ],
         );
       },
     );

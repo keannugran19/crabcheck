@@ -1,8 +1,10 @@
 import 'package:crabcheck/pages/report_page.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ReportButton extends StatelessWidget {
-  const ReportButton({super.key});
+  final XFile filePath;
+  const ReportButton({super.key, required this.filePath});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,9 @@ class ReportButton extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              child: const ReportDialog(), // Reuse ReportPage content
+              child: ReportDialog(
+                filePath: filePath,
+              ),
             );
           },
         );

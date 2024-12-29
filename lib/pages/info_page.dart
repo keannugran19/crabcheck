@@ -46,7 +46,7 @@ class InfoPage extends StatelessWidget {
     // redirect if Invalid Crab
     if (crabData == null || confidence <= validConfidence) {
       return InvalidData(
-        filePath: File(filePath.path),
+        filePath: filePath,
       );
     }
 
@@ -110,10 +110,12 @@ class InfoPage extends StatelessWidget {
           "Result",
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: 15.0),
-            child: ReportButton(),
+            padding: const EdgeInsets.only(right: 15.0),
+            child: ReportButton(
+              filePath: filePath,
+            ),
           ),
         ],
       ),
