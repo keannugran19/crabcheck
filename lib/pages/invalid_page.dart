@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:crabcheck/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../components/report_button.dart';
 
 class InvalidData extends StatelessWidget {
-  final File filePath;
+  final XFile filePath;
   const InvalidData({super.key, required this.filePath});
 
   @override
@@ -29,10 +30,12 @@ class InvalidData extends StatelessWidget {
           "Result",
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: 15.0),
-            child: ReportButton(),
+            padding: const EdgeInsets.only(right: 15.0),
+            child: ReportButton(
+              filePath: filePath,
+            ),
           ),
         ],
       ),
@@ -51,7 +54,7 @@ class InvalidData extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Image.file(
-                  filePath,
+                  File(filePath.path),
                   fit: BoxFit.cover,
                 ),
               ),
