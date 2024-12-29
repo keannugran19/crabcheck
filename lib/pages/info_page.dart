@@ -51,48 +51,48 @@ class InfoPage extends StatelessWidget {
     }
 
     // table for info page
-    var infoTable = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Table(
-        border: TableBorder.all(color: Colors.black),
-        columnWidths: const {
-          0: FlexColumnWidth(1),
-          1: FlexColumnWidth(1),
-        },
-        children: [
-          TableRow(
+    Padding infoTable() => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Table(
+            border: TableBorder.all(color: Colors.black),
+            columnWidths: const {
+              0: FlexColumnWidth(1),
+              1: FlexColumnWidth(1),
+            },
             children: [
-              _buildTableCell(text: 'Species', isTitle: true),
-              _buildTableCell(text: crabData.species),
+              TableRow(
+                children: [
+                  _buildTableCell(text: 'Species', isTitle: true),
+                  _buildTableCell(text: crabData.species),
+                ],
+              ),
+              TableRow(
+                children: [
+                  _buildTableCell(text: 'Local Name', isTitle: true),
+                  _buildTableCell(text: crabData.localName),
+                ],
+              ),
+              TableRow(
+                children: [
+                  _buildTableCell(text: 'Family', isTitle: true),
+                  _buildTableCell(text: crabData.family),
+                ],
+              ),
+              TableRow(
+                children: [
+                  _buildTableCell(text: 'Habitat', isTitle: true),
+                  _buildTableCell(text: crabData.habitat),
+                ],
+              ),
+              TableRow(
+                children: [
+                  _buildTableCell(text: 'Appearance', isTitle: true),
+                  _buildTableCell(text: crabData.appearance),
+                ],
+              )
             ],
           ),
-          TableRow(
-            children: [
-              _buildTableCell(text: 'Local Name', isTitle: true),
-              _buildTableCell(text: crabData.localName),
-            ],
-          ),
-          TableRow(
-            children: [
-              _buildTableCell(text: 'Family', isTitle: true),
-              _buildTableCell(text: crabData.family),
-            ],
-          ),
-          TableRow(
-            children: [
-              _buildTableCell(text: 'Habitat', isTitle: true),
-              _buildTableCell(text: crabData.habitat),
-            ],
-          ),
-          TableRow(
-            children: [
-              _buildTableCell(text: 'Appearance', isTitle: true),
-              _buildTableCell(text: crabData.appearance),
-            ],
-          )
-        ],
-      ),
-    );
+        );
 
     return Scaffold(
       appBar: AppBar(
@@ -164,7 +164,7 @@ class InfoPage extends StatelessWidget {
 
             // Info Table
             Expanded(
-              child: SingleChildScrollView(child: infoTable),
+              child: SingleChildScrollView(child: infoTable()),
             ),
 
             const SizedBox(height: 5),
