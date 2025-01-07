@@ -27,7 +27,7 @@ class _ReportDialogState extends State<ReportDialog> {
   // file
   UploadTask? uploadTask;
   // loading
-  bool _isLoading = false;
+  bool isLoading = false;
 
   // checkboxes and text field
   bool isImageChecked = false;
@@ -45,7 +45,7 @@ class _ReportDialogState extends State<ReportDialog> {
 
   // report text button functionaility
   Future<void> report() async {
-    setState(() => _isLoading = true);
+    setState(() => isLoading = true);
 
     _showLoadingDialog();
 
@@ -64,7 +64,7 @@ class _ReportDialogState extends State<ReportDialog> {
 
       _showErrorSnackBar(e);
     } finally {
-      setState(() => _isLoading = false);
+      setState(() => isLoading = false);
     }
   }
 

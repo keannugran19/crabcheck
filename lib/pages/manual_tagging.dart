@@ -31,7 +31,7 @@ class _ManualLocationTaggingPageState extends State<ManualLocationTaggingPage> {
 
   late MapController mapController;
 
-  bool _isLoading = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _ManualLocationTaggingPageState extends State<ManualLocationTaggingPage> {
 
   // method to set the location
   Future<void> _handleTagging() async {
-    setState(() => _isLoading = true);
+    setState(() => isLoading = true);
 
     // Show the "Please wait" dialog
     tagging.showLoadingDialog(context);
@@ -66,7 +66,7 @@ class _ManualLocationTaggingPageState extends State<ManualLocationTaggingPage> {
       // ignore: use_build_context_synchronously
       tagging.showErrorSnackBar(e, context);
     } finally {
-      setState(() => _isLoading = false);
+      setState(() => isLoading = false);
     }
   }
 
