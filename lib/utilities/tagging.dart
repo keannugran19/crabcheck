@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../pages/home_page.dart';
 import '../services/firebase.dart';
 import '../services/location.dart';
 
@@ -88,7 +89,8 @@ class Tagging {
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => const HomePage()));
             },
             child: const Text(
               'Done',
