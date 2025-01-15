@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crabcheck/components/button.dart';
 import 'package:crabcheck/constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +5,17 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../utilities/tagging.dart';
+import '../components/form_dialog.dart';
 
 class ManualLocationTaggingPage extends StatefulWidget {
   final String label;
   final XFile filePath;
+  final String taggingType;
   const ManualLocationTaggingPage(
-      {super.key, required this.label, required this.filePath});
+      {super.key,
+      required this.label,
+      required this.filePath,
+      required this.taggingType});
 
   @override
   State<ManualLocationTaggingPage> createState() =>
@@ -20,9 +23,6 @@ class ManualLocationTaggingPage extends StatefulWidget {
 }
 
 class _ManualLocationTaggingPageState extends State<ManualLocationTaggingPage> {
-  // call tagging util
-  Tagging tagging = Tagging();
-
   double latitude = 0;
   double longitude = 0;
 
@@ -31,43 +31,10 @@ class _ManualLocationTaggingPageState extends State<ManualLocationTaggingPage> {
 
   late MapController mapController;
 
-  bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
     mapController = MapController();
-  }
-
-  // method to set the location
-  Future<void> _handleTagging() async {
-    setState(() => isLoading = true);
-
-    // Show the "Please wait" dialog
-    tagging.showLoadingDialog(context);
-
-    try {
-      // Determine position and upload file
-      final loc = GeoPoint(latitude, longitude);
-      final downloadUrl = await tagging.uploadFile(widget.filePath);
-
-      // Save data to Firestore
-      await tagging.saveToFirestore(loc, downloadUrl, widget.label);
-
-      // Close loading dialog after upload is complete
-      if (mounted) Navigator.of(context).pop();
-
-      // Show success dialog
-      if (mounted) tagging.showSuccessDialog(context);
-    } catch (e) {
-      // Close loading dialog in case of an error
-      if (mounted) Navigator.of(context).pop();
-
-      // ignore: use_build_context_synchronously
-      tagging.showErrorSnackBar(e, context);
-    } finally {
-      setState(() => isLoading = false);
-    }
   }
 
   @override
@@ -140,7 +107,25 @@ class _ManualLocationTaggingPageState extends State<ManualLocationTaggingPage> {
                       child: Button(
                           buttonText: "Set Location",
                           buttonColor: primaryColor,
-                          onPressed: _handleTagging)),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: FormDialog(
+                                    label: widget.label,
+                                    filePath: widget.filePath,
+                                    latitude: latitude,
+                                    longitude: longitude,
+                                    taggingType: widget.taggingType,
+                                  ),
+                                );
+                              },
+                            );
+                          })),
                 ],
               ),
             ),

@@ -1,4 +1,5 @@
-import 'package:crabcheck/components/dialog.dart';
+import 'package:crabcheck/components/form_dialog.dart';
+import 'package:crabcheck/components/instructions_dialog.dart';
 import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/crab_list.dart';
 import 'package:crabcheck/pages/howtouse_page.dart';

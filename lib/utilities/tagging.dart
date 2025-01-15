@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../components/form_dialog.dart';
 import '../pages/home_page.dart';
 import '../services/firebase.dart';
 import '../services/location.dart';
@@ -27,13 +28,16 @@ class Tagging {
     return await ref.getDownloadURL();
   }
 
-  Future<void> saveToFirestore(
-      GeoPoint location, String imageUrl, String label) async {
+  Future<void> saveToFirestore(GeoPoint location, String imageUrl, String label,
+      String name, String occupation, String userAddress) async {
     // Fetch the address asynchronously
     final address = await firestore.getAddressFromCoordinates(location);
 
     // Create the crab data with the fetched address
     final crabData = {
+      "name": name,
+      "occupation": occupation,
+      "userAddress": userAddress,
       "species": label,
       "edibility": determineEdibility(label),
       "location": location,

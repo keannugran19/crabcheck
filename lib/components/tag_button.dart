@@ -6,6 +6,8 @@ import 'package:crabcheck/utilities/tagging.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'form_dialog.dart';
+
 //* This button is responsible of tagging the location of the user to send to Database > Dashboard
 
 class TagButton extends StatefulWidget {
@@ -27,6 +29,8 @@ class _TagButtonState extends State<TagButton> {
   Tagging tagging = Tagging();
 
   bool _isLoading = false;
+
+  String taggingType = '';
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +61,26 @@ class _TagButtonState extends State<TagButton> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextButton(
-                  onPressed: _handleTagging // Handle automatic tagging
-                  ,
+                  onPressed: () {
+                    setState(() {
+                      taggingType = 'automatic';
+                    });
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: FormDialog(
+                            label: widget.label,
+                            filePath: widget.filePath,
+                            taggingType: taggingType,
+                          ),
+                        );
+                      },
+                    );
+                  },
                   child: const Text(
                     'Automatic',
                     style: TextStyle(fontSize: 16),
@@ -66,7 +88,12 @@ class _TagButtonState extends State<TagButton> {
                 ),
                 const SizedBox(height: 10), // Add vertical spacing
                 TextButton(
-                  onPressed: navigateToManualTagging,
+                  onPressed: () {
+                    setState(() {
+                      taggingType = 'manual';
+                    });
+                    navigateToManualTagging();
+                  },
                   child: const Text(
                     'Manual',
                     style: TextStyle(fontSize: 16),
@@ -89,38 +116,9 @@ class _TagButtonState extends State<TagButton> {
         builder: (context) => ManualLocationTaggingPage(
           filePath: widget.filePath,
           label: widget.label,
+          taggingType: taggingType,
         ),
       ),
     );
-  }
-
-  Future<void> _handleTagging() async {
-    setState(() => _isLoading = true);
-
-    // Show the "Please wait" dialog
-    tagging.showLoadingDialog(context);
-
-    try {
-      // Determine position and upload file
-      final loc = await tagging.getUserLocation();
-      final downloadUrl = await tagging.uploadFile(widget.filePath);
-
-      // Save data to Firestore
-      await tagging.saveToFirestore(loc, downloadUrl, widget.label);
-
-      // Close loading dialog after upload is complete
-      if (mounted) Navigator.of(context).pop();
-
-      // Show success dialog
-      if (mounted) tagging.showSuccessDialog(context);
-    } catch (e) {
-      // Close loading dialog in case of an error
-      if (mounted) Navigator.of(context).pop();
-
-      // ignore: use_build_context_synchronously
-      tagging.showErrorSnackBar(e, context);
-    } finally {
-      setState(() => _isLoading = false);
-    }
   }
 }
