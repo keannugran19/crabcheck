@@ -31,9 +31,9 @@ class _FormDialogState extends State<FormDialog> {
   bool isLoading = false;
 
   // text controllers for the form
-  final TextEditingController name = TextEditingController();
-  final TextEditingController occupation = TextEditingController();
-  final TextEditingController userAddress = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController occupation = TextEditingController();
+  TextEditingController userAddress = TextEditingController();
 
   // method to set the location manually
   Future<void> manualTagging() async {
@@ -170,7 +170,19 @@ class _FormDialogState extends State<FormDialog> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        name.text = 'Unspecified';
+                        occupation.text = 'Unspecified';
+                        userAddress.text = 'Unspecified';
+                      });
+
+                      if (widget.taggingType == 'manual') {
+                        manualTagging();
+                      } else {
+                        automaticTagging();
+                      }
+                    },
                     child: const Text('Skip'),
                   ),
                   TextButton(

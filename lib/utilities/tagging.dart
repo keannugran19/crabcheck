@@ -5,7 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../components/form_dialog.dart';
 import '../pages/home_page.dart';
 import '../services/firebase.dart';
 import '../services/location.dart';
