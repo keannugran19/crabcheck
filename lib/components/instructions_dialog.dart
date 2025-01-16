@@ -4,7 +4,7 @@ class DialogBox extends StatefulWidget {
   const DialogBox({super.key});
 
   @override
-  _DialogBoxState createState() => _DialogBoxState();
+  State<DialogBox> createState() => _DialogBoxState();
 }
 
 class _DialogBoxState extends State<DialogBox> {

@@ -1,4 +1,3 @@
-import 'package:crabcheck/components/form_dialog.dart';
 import 'package:crabcheck/components/instructions_dialog.dart';
 import 'package:crabcheck/pages/about_page.dart';
 import 'package:crabcheck/pages/crab_list.dart';
@@ -84,6 +83,7 @@ class _HomePageState extends State<HomePage> {
 
     // After the delay, navigate to the InfoPage
     Navigator.pushReplacement(
+      // ignore: use_build_context_synchronously
       context,
       MaterialPageRoute(
         builder: (context) => InfoPage(
