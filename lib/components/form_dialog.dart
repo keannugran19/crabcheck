@@ -169,22 +169,22 @@ class _FormDialogState extends State<FormDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        name.text = 'Unspecified';
-                        occupation.text = 'Unspecified';
-                        userAddress.text = 'Unspecified';
-                      });
+                  // TextButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       name.text = 'Unspecified';
+                  //       occupation.text = 'Unspecified';
+                  //       userAddress.text = 'Unspecified';
+                  //     });
 
-                      if (widget.taggingType == 'manual') {
-                        manualTagging();
-                      } else {
-                        automaticTagging();
-                      }
-                    },
-                    child: const Text('Skip'),
-                  ),
+                  //     if (widget.taggingType == 'manual') {
+                  //       manualTagging();
+                  //     } else {
+                  //       automaticTagging();
+                  //     }
+                  //   },
+                  //   child: const Text('Skip'),
+                  // ),
                   TextButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
