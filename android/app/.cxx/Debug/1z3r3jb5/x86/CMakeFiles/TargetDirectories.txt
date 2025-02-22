@@ -1,0 +1,2 @@
+C:/flutterApps/crabcheck/android/app/.cxx/Debug/1z3r3jb5/x86/CMakeFiles/edit_cache.dir
+C:/flutterApps/crabcheck/android/app/.cxx/Debug/1z3r3jb5/x86/CMakeFiles/rebuild_cache.dir
