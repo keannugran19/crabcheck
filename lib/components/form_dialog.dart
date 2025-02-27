@@ -40,7 +40,7 @@ class _FormDialogState extends State<FormDialog> {
     setState(() => isLoading = true);
 
     // Show the "Please wait" dialog
-    tagging.showLoadingDialog(context);
+    // tagging.showLoadingDialog(context);
 
     try {
       // Determine position and upload file
@@ -72,7 +72,7 @@ class _FormDialogState extends State<FormDialog> {
     setState(() => isLoading = true);
 
     // Show the "Please wait" dialog
-    tagging.showLoadingDialog(context);
+    // tagging.showLoadingDialog(context);
 
     try {
       // Determine position and upload file
@@ -124,6 +124,20 @@ class _FormDialogState extends State<FormDialog> {
     var formTitleStyle = const TextStyle(
       fontWeight: FontWeight.w500,
     );
+
+    void doneIsPressed() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (formKey.currentState!.validate()) {
+        if (widget.taggingType == 'manual') {
+          manualTagging();
+        } else {
+          automaticTagging();
+        }
+      }
+    }
 
     return SingleChildScrollView(
       child: Container(
@@ -186,19 +200,13 @@ class _FormDialogState extends State<FormDialog> {
                   //   child: const Text('Skip'),
                   // ),
                   TextButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        if (widget.taggingType == 'manual') {
-                          manualTagging();
-                        } else {
-                          automaticTagging();
-                        }
-                      }
-                    },
-                    child: const Text(
-                      'Done',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    onPressed: isLoading ? null : doneIsPressed,
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text(
+                            'Done',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                   ),
                 ],
               ),
