@@ -161,21 +161,21 @@ class _FormDialogState extends State<FormDialog> {
               const SizedBox(height: 15),
               // form to fill up for the user
               Text(
-                "Name:",
+                "Your Name:",
                 style: formTitleStyle,
               ),
               buildTextField("e.g. Juan Dela Cruz", name),
               const SizedBox(height: 10),
               // Occupation text field
               Text(
-                "Occupation:",
+                "Your Occupation:",
                 style: formTitleStyle,
               ),
               buildTextField("e.g. Student, Farmer etc.", occupation),
               const SizedBox(height: 10),
               // address text field
               Text(
-                "Address:",
+                "Your Address:",
                 style: formTitleStyle,
               ),
               buildTextField("e.g. Brgy. Gredu", userAddress),
