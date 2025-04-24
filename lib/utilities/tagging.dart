@@ -51,7 +51,7 @@ class Tagging {
 
   String determineEdibility(String species) {
     switch (species) {
-      case "Charybdis Feriatus":
+      case "Cardisoma Carnifex":
       case 'Scylla Serrata':
       case 'Portunos Pelagicus':
         return "Edible";
